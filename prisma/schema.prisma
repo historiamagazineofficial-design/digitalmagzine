@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String   @default("")
+  content     String   @default("")
+  category    String   @default("Articles")
+  author      String   @default("Anonymous")
+  authorImage String   @default("")
+  authorBio   String   @default("")
+  date        String   @default("")
+  imageUrl    String   @default("")
+  readingTime String   @default("5 min read")
+  status      String   @default("Draft")
+  tags        String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+}
+
+model Voice {
+  id          String   @id @default(cuid())
+  contributor String
+  role        String   @default("")
+  quote       String   @default("")
+  imageUrl    String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TagStore {
+  id        String   @id @default(cuid())
+  tags      String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id              String   @id @default(cuid())
+  siteName        String   @default("THE HISTORIA")
+  description     String   @default("A Digital Magazine exploring faith, art, and history.")
+  contactEmail    String   @default("editor@thehistoria.com")
+  socialTwitter   String   @default("")
+  socialInstagram String   @default("")
+  primaryColor    String   @default("#ec5b13")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model HeroConfig {
+  id            String   @id @default(cuid())
+  articleSlug   String   @default("architecture-of-silence")
+  customTitle   String   @default("")
+  customExcerpt String   @default("")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  author    String   @default("Anonymous")
+  content   String
+  article   String   @default("")
+  date      String   @default("")
+  status    String   @default("Pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  name      String
+  size      String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

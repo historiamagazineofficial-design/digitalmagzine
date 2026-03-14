@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Malayalam:wght@400;700&family=Noto+Serif+Malayalam:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1754cf;
+  --color-background-light: #f6f6f8;
+  --color-background-dark: #111621;
+  --color-slate-custom: #1e293b;
+
+  --font-sans: "Inter", "Noto Sans Arabic", "Noto Sans Malayalam", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", "Noto Naskh Arabic", "Noto Serif Malayalam", ui-serif, Georgia, Cambria, serif;
+  
+  --font-display: var(--font-sans);
+}
+
+@variant dark (:where(.dark, .dark *) &);
+
+:root {
+  --background: #f6f6f8;
+  --background-rgb: 246, 246, 248;
+  --foreground: #0f172a;
+}
+
+.dark {
+  --background: #111621;
+  --background-rgb: 17, 22, 33;
+  --foreground: #f1f5f9;
+}
+
+.sepia {
+  --background: #f4ecdb;
+  --foreground: #433422;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply transition-colors duration-300;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    @apply text-slate-900 dark:text-white transition-colors duration-300;
+  }
+
+  .serif-font {
+    font-family: var(--font-serif);
+  }
+
+  .content-area {
+    font-size: var(--reader-font-size, 1.125rem);
+  }
+}
+
+/* Hide scrollbar for category nav */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+
+/* Masonry Grid */
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .masonry-grid { column-count: 2; }
+}
+@media (min-width: 1024px) {
+  .masonry-grid { column-count: 3; }
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+

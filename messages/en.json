@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Home",
+    "archives": "Archives",
+    "fiction": "Fiction",
+    "voices": "Voices",
+    "admin": "Admin Access"
+  },
+  "home": {
+    "hero": {
+      "featured": "Featured Cover"
+    },
+    "articles": {
+      "title": "Articles",
+      "viewMore": "View More Articles"
+    },
+    "voices": {
+      "title": "Voices",
+      "contributor": "Contributor",
+      "readEditorial": "Read the Editorial",
+      "exploreAll": "Explore All Perspectives"
+    },
+    "footer": {
+      "rights": "ALL RIGHTS RESERVED.",
+      "tagline": "Curating the archives of humanity with precision and passion."
+    }
+  },
+  "article": {
+    "by": "By",
+    "published": "Published",
+    "readTime": "Reading Time",
+    "noEntries": "The scrolls are silent for {tag}."
+  },
+  "reader": {
+    "light": "Light Mode",
+    "sepia": "Sepia Mode",
+    "dark": "Dark Mode",
+    "zen": "Zen Mode",
+    "fontSize": "Font Size"
+  },
+  "comments": {
+    "title": "The Literature Circle",
+    "subtitle": "{count} reflections shared. Join the intellectual exchange.",
+    "placeholder": "Share your insight or reflection...",
+    "name": "Your name",
+    "post": "Post",
+    "reply": "Reply",
+    "justNow": "Just now"
+  },
+  "notifications": {
+    "title": "Stay Enlightened",
+    "description": "Allow notifications to receive immediate alerts when new essays and poetry are published to the archives.",
+    "allow": "Allow",
+    "later": "Maybe Later"
+  }
+}

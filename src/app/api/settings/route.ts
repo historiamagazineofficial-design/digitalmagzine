@@ -1,0 +1,43 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
+
+export async function GET() {
+  try {
+    let settings = await prisma.siteSettings.findFirst();
+    if (!settings) {
+      settings = await prisma.siteSettings.create({
+        data: {
+          siteName: 'THE HISTORIA',
+          description: 'A Digital Magazine exploring faith, art, and history.',
+          contactEmail: 'editor@thehistoria.com',
+          primaryColor: '#ec5b13',
+        },
+      });
+    }
+    return NextResponse.json({ success: true, data: settings });
+  } catch (err: any) {
+    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+  }
+}
+
+export async function PUT(req: NextRequest) {
+  try {
+    const body = await req.json();
+    let settings = await prisma.siteSettings.findFirst();
+    
+    if (settings) {
+      settings = await prisma.siteSettings.update({
+        where: { id: settings.id },
+        data: body,
+      });
+    } else {
+      settings = await prisma.siteSettings.create({
+        data: body,
+      });
+    }
+    
+    return NextResponse.json({ success: true, data: settings });
+  } catch (err: any) {
+    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+  }
+}
