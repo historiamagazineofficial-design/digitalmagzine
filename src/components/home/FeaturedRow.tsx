@@ -31,7 +31,7 @@ export default function FeaturedRow({ articles }: FeaturedRowProps) {
                 className={`text-lg md:text-xl font-bold font-serif leading-snug text-center text-black/90 dark:text-white/90 mb-3 md:group-hover:text-[#2E5BFF] transition-colors line-clamp-3 ${
                   /[\u0D00-\u0D7F]/.test(article.title) ? 'font-bold' : ''
                 }`}
-                style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2rem', lineHeight: '1.2' } : {}}
+                style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2.6rem', lineHeight: '1.2' } : {}}
               >
                 {article.title}
               </h3>

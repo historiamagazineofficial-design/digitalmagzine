@@ -44,7 +44,7 @@ export default async function MythosSection() {
                <span className="inline-block text-[9px] font-bold mb-4 text-[#2E5BFF]">Mythos Selection</span>
                <h3 
                  className="text-2xl md:text-3xl font-bold font-serif mb-4 md:group-hover:text-[#2E5BFF] transition-colors leading-tight"
-                 style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
+                 style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2.6rem' } : {}}
                >
                  {article.title}
                </h3>
