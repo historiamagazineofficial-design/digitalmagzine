@@ -7,7 +7,8 @@ import { getArticleBySlug } from '@/lib/api';
 import { ReaderProvider } from '@/hooks/useReader';
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+  const paramsData = await params;
+  const slug = decodeURIComponent(paramsData.slug);
     
   const article = await getArticleBySlug(slug);
     

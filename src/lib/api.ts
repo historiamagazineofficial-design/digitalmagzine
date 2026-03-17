@@ -153,7 +153,8 @@ export async function getAllArticles(): Promise<Article[]> {
   }
 }
 
-export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
+export async function getArticleBySlug(encodedSlug: string): Promise<Article | undefined> {
+  const slug = decodeURIComponent(encodedSlug);
   if (STRAPI_URL) {
     try {
       const result = await fetchStrapi<{ data: any[] }>('/articles', { 
@@ -251,7 +252,8 @@ export async function createArticle(data: Partial<Article>): Promise<boolean> {
 }
 
 // UPDATE
-export async function updateArticle(slug: string, data: Partial<Article>): Promise<boolean> {
+export async function updateArticle(encodedSlug: string, data: Partial<Article>): Promise<boolean> {
+  const slug = decodeURIComponent(encodedSlug);
   if (STRAPI_URL && STRAPI_TOKEN) {
     try {
       const search = await fetchStrapi<{ data: any[] }>('/articles', { 
@@ -289,7 +291,8 @@ export async function updateArticle(slug: string, data: Partial<Article>): Promi
 }
 
 // DELETE
-export async function deleteArticle(slug: string): Promise<boolean> {
+export async function deleteArticle(encodedSlug: string): Promise<boolean> {
+  const slug = decodeURIComponent(encodedSlug);
   if (STRAPI_URL) {
     try {
       const result = await fetchStrapi<{ data: any[] }>('/articles', { 

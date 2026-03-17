@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const slug = (await params).slug;
+    const slug = decodeURIComponent((await params).slug);
     const article = await prisma.article.findUnique({
       where: { slug },
     });
@@ -26,7 +26,7 @@ export async function PUT(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const slug = (await params).slug;
+    const slug = decodeURIComponent((await params).slug);
     const body = await req.json();
 
     // Build a strictly typed update payload — only known Article model fields.
@@ -71,7 +71,7 @@ export async function DELETE(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const slug = (await params).slug;
+    const slug = decodeURIComponent((await params).slug);
     await prisma.article.delete({
       where: { slug },
     });
