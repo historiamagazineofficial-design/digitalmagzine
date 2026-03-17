@@ -39,7 +39,7 @@ export default function FeaturedRow({ articles }: FeaturedRowProps) {
               {/* Clean white space & minimalist shortened excerpt */}
               <p 
                 className={`text-xs font-serif italic text-slate-500 dark:text-slate-400 text-center line-clamp-3 mb-6 leading-relaxed ${/[\u0D00-\u0D7F]/.test(article.excerpt || '') ? 'opacity-95' : 'opacity-80'}`}
-                style={/[\u0D00-\u0D7F]/.test(article.excerpt || '') ? { fontFamily: '"Rachana", serif', fontWeight: 500, fontSize: '0.925rem', lineHeight: '1.4' } : {}}
+                style={/[\u0D00-\u0D7F]/.test(article.excerpt || '') ? { fontFamily: '"Rachana", serif', fontWeight: 500, fontSize: '1.1rem', lineHeight: '1.4' } : {}}
               >
                 {article.excerpt}
               </p>
