@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const q = searchParams.get('q')?.toLowerCase().trim();
 
@@ -9,12 +9,14 @@ export async function GET(request: Request) {
   }
 
   try {
+    const session = request.cookies.get('inkspire_session');
+    const isAuthenticated = session?.value === 'authenticated';
+
     const { dbGetArticles } = await import('@/lib/server-db');
-    const all = await dbGetArticles();
+    const all = await dbGetArticles({ status: isAuthenticated ? 'all' : 'Published' });
     
     const results = all
       .filter((a: any) => 
-        a.status === 'Published' &&
         (
           a.title?.toLowerCase().includes(q) ||
           a.excerpt?.toLowerCase().includes(q) ||
