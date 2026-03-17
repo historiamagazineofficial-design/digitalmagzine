@@ -6,7 +6,7 @@ import ThemeToggle from './ThemeToggle';
 import SearchBar from './SearchBar';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Search, X } from 'lucide-react';
+import { Search, X, ArrowRight } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -291,7 +291,7 @@ export default function SiteHeader() {
                 className="inline-flex items-center gap-2 text-sm font-black text-black dark:text-white hover:gap-4 transition-all"
               >
                 {'Admin Access'}
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                <ArrowRight size={14} className="ml-1" />
               </Link>
             </div>
           </div>
