@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Search, X, ArrowRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 interface Article {
@@ -18,7 +17,6 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
   const [results, setResults] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -124,7 +122,7 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
                 </ul>
               ) : (
                 <div className="py-12 text-center">
-                  <p className="text-slate-400 font-serif italic text-lg">No results found for "{query}"</p>
+                  <p className="text-slate-400 font-serif italic text-lg">No results found for &quot;{query}&quot;</p>
                   <p className="text-[10px] text-slate-400 mt-2 font-bold uppercase tracking-widest">Try a different search term</p>
                 </div>
               )}

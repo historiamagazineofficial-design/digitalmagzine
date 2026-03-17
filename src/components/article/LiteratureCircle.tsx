@@ -47,7 +47,15 @@ function CommentItem({ comment, depth = 0 }: { comment: Comment; depth?: number 
               rows={2}
               className="flex-1 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-sm px-4 py-3 outline-none focus:border-black dark:focus:border-white transition-all resize-none rounded-xl font-serif"
             />
-            <button className="self-end p-2 px-4 bg-black text-white dark:bg-white dark:text-black hover:opacity-80 transition-opacity rounded-full">
+            <button 
+              onClick={() => {
+                if (replyText.trim()) {
+                  setReplyText('');
+                  setShowReply(false);
+                }
+              }}
+              className="self-end p-2 px-4 bg-black text-white dark:bg-white dark:text-black hover:opacity-80 transition-opacity rounded-full"
+            >
               <Send size={15} />
             </button>
           </div>

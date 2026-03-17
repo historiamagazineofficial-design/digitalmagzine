@@ -18,6 +18,50 @@ export interface Article {
   showOnHomepage?: boolean;
 }
 
+export interface Voice {
+  id: string;
+  contributor: string;
+  role: string;
+  quote: string;
+  imageUrl: string;
+  createdAt?: string | Date;
+}
+
+export interface ArticleComment {
+  id: string;
+  author: string;
+  content: string;
+  article: string;
+  date: string;
+  status: string;
+  createdAt?: string | Date;
+  replies?: ArticleComment[];
+}
+
+export interface Media {
+  id: string;
+  url: string;
+  name: string;
+  size: string;
+  publicId?: string;
+}
+
+export interface HeroConfig {
+  articleSlug: string;
+  secondarySlug?: string;
+  customTitle?: string;
+  customExcerpt?: string;
+}
+
+export interface SiteSettings {
+  siteName: string;
+  description: string;
+  contactEmail: string;
+  socialTwitter?: string;
+  socialInstagram?: string;
+  primaryColor: string;
+}
+
 // MOCK_ARTICLES is kept minimal — only used as an absolute last-resort when the database
 // is completely unreachable. Return empty so users see "no articles" rather than fake content.
 export const MOCK_ARTICLES: Article[] = [];
@@ -27,7 +71,7 @@ export const MOCK_ARTICLES: Article[] = [];
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
-function mapStrapiToArticle(data: any): Article {
+function mapStrapiToArticle(data: { attributes?: any; id?: string | number }): Article {
   const attrs = data.attributes || data;
   const id = data.id;
   
@@ -279,7 +323,7 @@ export async function deleteArticle(slug: string): Promise<boolean> {
 
 // ── VOICES, TAGS, SETTINGS, HERO (Always MongoDB) ─────────────────
 
-export async function getVoices(): Promise<any[]> {
+export async function getVoices(): Promise<Voice[]> {
   if (typeof window === 'undefined') {
     try {
       const { dbGetVoices } = await import('@/lib/server-db');
@@ -289,14 +333,14 @@ export async function getVoices(): Promise<any[]> {
     }
   }
   try {
-    const result = await clientFetch<{ success: boolean; data: any[] }>('/api/voices');
+    const result = await clientFetch<{ success: boolean; data: Voice[] }>('/api/voices');
     return result.data;
   } catch {
     return [];
   }
 }
 
-export async function saveVoice(voice: any): Promise<boolean> {
+export async function saveVoice(voice: Partial<Voice>): Promise<boolean> {
   try {
     await clientFetch('/api/voices', {
       method: 'POST',
@@ -309,7 +353,7 @@ export async function saveVoice(voice: any): Promise<boolean> {
   }
 }
 
-export async function updateVoice(id: string, voice: any): Promise<boolean> {
+export async function updateVoice(id: string, voice: Partial<Voice>): Promise<boolean> {
   try {
     await clientFetch(`/api/voices/${id}`, {
       method: 'PUT',
@@ -322,7 +366,7 @@ export async function updateVoice(id: string, voice: any): Promise<boolean> {
   }
 }
 
-export async function deleteVoice(id: any): Promise<boolean> {
+export async function deleteVoice(id: string): Promise<boolean> {
   try {
     await clientFetch(`/api/voices/${id}`, { method: 'DELETE' });
     return true;
@@ -361,7 +405,7 @@ export async function saveTags(tags: string[]): Promise<boolean> {
   }
 }
 
-export async function getHeroConfig(): Promise<any> {
+export async function getHeroConfig(): Promise<HeroConfig> {
   if (typeof window === 'undefined') {
     try {
       const { unstable_noStore } = await import('next/cache');
@@ -376,14 +420,14 @@ export async function getHeroConfig(): Promise<any> {
     }
   }
   try {
-    const result = await clientFetch<{ success: boolean; data: any }>('/api/hero-config');
+    const result = await clientFetch<{ success: boolean; data: HeroConfig }>('/api/hero-config');
     return result.data;
   } catch {
     return { articleSlug: '' };
   }
 }
 
-export async function saveHeroConfig(config: any): Promise<{ success: boolean; error?: string }> {
+export async function saveHeroConfig(config: HeroConfig): Promise<{ success: boolean; error?: string }> {
   try {
     const res = await clientFetch<{ success: boolean; error?: string }>('/api/hero-config', {
       method: 'PUT',
@@ -396,7 +440,7 @@ export async function saveHeroConfig(config: any): Promise<{ success: boolean; e
   }
 }
 
-export async function getSiteSettings(): Promise<any> {
+export async function getSiteSettings(): Promise<SiteSettings | Record<string, never>> {
   if (typeof window === 'undefined') {
     try {
       const { dbGetSiteSettings } = await import('@/lib/server-db');
@@ -406,14 +450,14 @@ export async function getSiteSettings(): Promise<any> {
     }
   }
   try {
-    const result = await clientFetch<{ success: boolean; data: any }>('/api/settings');
+    const result = await clientFetch<{ success: boolean; data: SiteSettings }>('/api/settings');
     return result.data;
   } catch {
     return {};
   }
 }
 
-export async function saveSiteSettings(settings: any): Promise<boolean> {
+export async function saveSiteSettings(settings: SiteSettings): Promise<boolean> {
   try {
     await clientFetch('/api/settings', {
       method: 'PUT',
@@ -426,7 +470,7 @@ export async function saveSiteSettings(settings: any): Promise<boolean> {
   }
 }
 
-export async function getFlaggedComments(): Promise<any[]> {
+export async function getFlaggedComments(): Promise<ArticleComment[]> {
   if (typeof window === 'undefined') {
     try {
       const { dbGetPendingComments } = await import('@/lib/server-db');
@@ -436,7 +480,7 @@ export async function getFlaggedComments(): Promise<any[]> {
     }
   }
   try {
-    const result = await clientFetch<{ success: boolean; data: any[] }>('/api/comments');
+    const result = await clientFetch<{ success: boolean; data: ArticleComment[] }>('/api/comments');
     return result.data;
   } catch {
     return [];
@@ -466,16 +510,16 @@ export async function deleteComment(id: string): Promise<boolean> {
 }
 
 // Media Management
-export async function getMedia(): Promise<any[]> {
+export async function getMedia(): Promise<Media[]> {
   try {
-    const result = await clientFetch<{ success: boolean; data: any[] }>('/api/media');
+    const result = await clientFetch<{ success: boolean; data: Media[] }>('/api/media');
     return result.data;
   } catch {
     return [];
   }
 }
 
-export async function saveMedia(item: any): Promise<boolean> {
+export async function saveMedia(item: Partial<Media>): Promise<boolean> {
   try {
     await clientFetch('/api/media', {
       method: 'POST',

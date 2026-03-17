@@ -42,7 +42,7 @@ export default function SpotlightHero({
         </h1>
         
         <p className="text-xl md:text-2xl font-serif max-w-2xl mx-auto opacity-70 italic font-light leading-relaxed line-clamp-2">
-          "{excerpt}"
+          &quot;{excerpt}&quot;
         </p>
 
         <div className="pt-8 flex flex-col items-center justify-center space-y-6">

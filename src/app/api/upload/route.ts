@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(arrayBuffer);
 
     // Upload to Cloudinary
-    const { url, publicId, bytes, format } = await uploadToCloudinary(
+    const { url, publicId, bytes } = await uploadToCloudinary(
       buffer,
       file.name,
       'the-inkspire'
@@ -55,10 +55,10 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, data: media }, { status: 201 });
-  } catch (err: any) {
+  } catch (err) {
     console.error('UPLOAD_ERROR:', err);
     return NextResponse.json(
-      { success: false, error: err.message ?? 'Upload failed' },
+      { success: false, error: err instanceof Error ? err.message : 'Upload failed' },
       { status: 500 }
     );
   }

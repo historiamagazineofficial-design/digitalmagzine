@@ -42,12 +42,10 @@ export function ReaderProvider({ children }: { children: ReactNode }) {
     const savedTheme = localStorage.getItem('inkspire_theme') as ReadingTheme;
     const isGlobalDark = document.documentElement.classList.contains('dark');
     
-    if (savedTheme) {
+    if (savedTheme && savedTheme !== theme) {
       setTheme(savedTheme);
-    } else if (isGlobalDark) {
+    } else if (isGlobalDark && theme !== 'dark') {
       setTheme('dark');
-    } else {
-      setTheme('light');
     }
   }, []);
 

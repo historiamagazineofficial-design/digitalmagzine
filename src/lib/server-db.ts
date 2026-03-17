@@ -66,9 +66,14 @@ export async function dbSeedArticlesIfEmpty(mockArticles: Article[]) {
   if (count === 0) {
     console.log('Seeding articles into Postgres...');
     for (const art of mockArticles) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { _id, ...rest } = art as any;
-      await prisma.article.create({ data: rest });
+      const { _id: _, ...rest } = art;
+      console.log(`Seeding: ${art.slug}`);
+      await prisma.article.create({ 
+        data: {
+          ...rest,
+          tags: rest.tags || []
+        } 
+      });
     }
   }
 }
@@ -132,7 +137,7 @@ export async function dbUpdateSiteSettings(data: Prisma.SiteSettingsUpdateInput)
       data,
     });
   } else {
-    return await prisma.siteSettings.create({ data: data as any });
+    return await prisma.siteSettings.create({ data: data as Prisma.SiteSettingsCreateInput });
   }
 }
 
@@ -154,7 +159,7 @@ export async function dbUpdateHeroConfig(data: Prisma.HeroConfigUpdateInput) {
       data,
     });
   } else {
-    return await prisma.heroConfig.create({ data: data as any });
+    return await prisma.heroConfig.create({ data: data as Prisma.HeroConfigCreateInput });
   }
 }
 

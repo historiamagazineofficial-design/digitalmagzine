@@ -6,7 +6,7 @@ import ThemeToggle from './ThemeToggle';
 import SearchBar from './SearchBar';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -74,7 +74,7 @@ export default function SiteHeader() {
     <>
       <header 
         ref={headerRef}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center h-32 border-b border-transparent transition-colors duration-300 zen-hide"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center h-[100px] border-b border-transparent zen-hide"
         style={{ 
           // Inject CSS variables for dark mode compatibility in GSAP
           '--header-bg-scrolled': 'rgba(var(--background-rgb, 246, 246, 248), 0.85)' 
@@ -256,7 +256,7 @@ export default function SiteHeader() {
                 </div>
               </div>
               <button onClick={() => setMenuOpen(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all">
-                <span className="material-symbols-outlined text-3xl">close</span>
+                <X size={28} className="text-slate-900 dark:text-white" />
               </button>
             </div>
             <nav className="flex flex-col gap-8">

@@ -51,7 +51,7 @@ export default async function VoicesSection() {
         </div>
         
         <div className="space-y-24">
-          {displayVoices.map((voice: Voice, idx) => (
+          {displayVoices.map((voice: Voice) => (
             <div key={voice.id} className="flex flex-col md:flex-row gap-12 items-start group">
               <div className="flex-shrink-0 w-full md:w-48 flex flex-col items-center md:items-start text-center md:text-left">
                 {voice.imageUrl && (
