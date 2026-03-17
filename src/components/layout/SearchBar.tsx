@@ -108,7 +108,10 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
                               {article.category}
                             </span>
                           </div>
-                          <p className="font-serif font-bold text-black dark:text-white truncate group-hover:text-[#2E5BFF] transition-colors">
+                          <p 
+                            className="font-serif font-bold text-black dark:text-white truncate group-hover:text-[#2E5BFF] transition-colors"
+                            style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
+                          >
                             {article.title}
                           </p>
                           <p className="text-sm text-slate-500 mt-1 line-clamp-1 font-serif italic">
