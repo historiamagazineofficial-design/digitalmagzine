@@ -32,7 +32,10 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
         </div>
         <div className="p-6">
           <p className="text-slate-500 text-[10px] font-bold mb-2">{article.author}</p>
-          <h3 className="font-serif text-xl font-bold leading-snug text-black dark:text-white md:group-hover:text-slate-600 transition-colors mb-4">
+          <h3 
+            className="font-serif text-xl font-bold leading-snug text-black dark:text-white md:group-hover:text-slate-600 transition-colors mb-4"
+            style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
+          >
             {article.title}
           </h3>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-3 font-serif italic border-l-2 border-black/5 pl-4 ml-1">
@@ -64,7 +67,12 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
       </div>
       <div>
         <p className="text-[10px] font-bold text-slate-400 mb-3">{article.author}</p>
-        <h3 className="text-2xl font-bold font-serif mb-4 md:group-hover:text-slate-600 transition-colors leading-tight text-black dark:text-slate-200">{article.title}</h3>
+        <h3 
+          className="text-2xl font-bold font-serif mb-4 md:group-hover:text-slate-600 transition-colors leading-tight text-black dark:text-slate-200"
+          style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
+        >
+          {article.title}
+        </h3>
         <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm line-clamp-2 italic font-serif opacity-80">{article.excerpt}</p>
       </div>
     </Link>
