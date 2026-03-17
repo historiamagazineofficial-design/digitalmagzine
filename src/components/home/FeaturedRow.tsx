@@ -27,7 +27,12 @@ export default function FeaturedRow({ articles }: FeaturedRowProps) {
               </div>
               
               {/* Smaller serif typography */}
-              <h3 className="text-lg md:text-xl font-bold font-serif leading-snug text-center text-black/90 dark:text-white/90 mb-3 md:group-hover:text-[#2E5BFF] transition-colors line-clamp-3">
+              <h3 
+                className={`text-lg md:text-xl font-bold font-serif leading-snug text-center text-black/90 dark:text-white/90 mb-3 md:group-hover:text-[#2E5BFF] transition-colors line-clamp-3 ${
+                  /[\u0D00-\u0D7F]/.test(article.title) ? 'font-bold' : ''
+                }`}
+                style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
+              >
                 {article.title}
               </h3>
               
