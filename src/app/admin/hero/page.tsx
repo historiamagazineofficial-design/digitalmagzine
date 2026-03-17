@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Save, Star, Loader2 } from 'lucide-react';
-import { getHeroConfig, saveHeroConfig } from '@/lib/api';
+import { getHeroConfig, saveHeroConfig, HeroConfig } from '@/lib/api';
 
 export default function HeroConfigPage() {
-  const [focusConfig, setFocusConfig] = useState({
+  const [focusConfig, setFocusConfig] = useState<HeroConfig>({
     articleSlug: '',
     secondarySlug: '',
     customTitle: '',
@@ -19,7 +19,12 @@ export default function HeroConfigPage() {
   useEffect(() => {
     async function load() {
       const config = await getHeroConfig();
-      setFocusConfig(config);
+      setFocusConfig({
+        articleSlug: config.articleSlug || '',
+        secondarySlug: config.secondarySlug || '',
+        customTitle: config.customTitle || '',
+        customExcerpt: config.customExcerpt || '',
+      });
       setIsLoading(false);
     }
     load();

@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { Save, Settings, Globe, Share2, Palette, Loader2 } from 'lucide-react';
-import { getSiteSettings, saveSiteSettings } from '@/lib/api';
+import { getSiteSettings, saveSiteSettings, SiteSettings } from '@/lib/api';
 
 export default function SiteSettingsPage() {
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<SiteSettings>({
     siteName: 'THE INKSPIRE',
     description: 'A Digital Magazine exploration into the intersection of faith, art, and history.',
     contactEmail: 'editor@theinkspire.com',
@@ -20,7 +20,16 @@ export default function SiteSettingsPage() {
   useEffect(() => {
     async function load() {
       const data = await getSiteSettings();
-      setSettings(data);
+      if (data && 'siteName' in data) {
+        setSettings({
+          siteName: data.siteName || '',
+          description: data.description || '',
+          contactEmail: data.contactEmail || '',
+          socialTwitter: data.socialTwitter || '',
+          socialInstagram: data.socialInstagram || '',
+          primaryColor: data.primaryColor || '#2E5BFF',
+        });
+      }
       setIsLoading(false);
     }
     load();
