@@ -31,15 +31,15 @@ export default function FeaturedRow({ articles }: FeaturedRowProps) {
                 className={`text-lg md:text-xl font-bold font-serif leading-snug text-center text-black/90 dark:text-white/90 mb-3 md:group-hover:text-[#2E5BFF] transition-colors line-clamp-3 ${
                   /[\u0D00-\u0D7F]/.test(article.title) ? 'font-bold' : ''
                 }`}
-                style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '1.6rem' } : {}}
+                style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2rem', lineHeight: '1.2' } : {}}
               >
                 {article.title}
               </h3>
               
               {/* Clean white space & minimalist shortened excerpt */}
               <p 
-                className={`text-xs font-serif italic text-slate-500 dark:text-slate-400 text-center line-clamp-3 mb-6 leading-relaxed ${/[\u0D00-\u0D7F]/.test(article.excerpt || '') ? 'opacity-95' : 'opacity-80'}`}
-                style={/[\u0D00-\u0D7F]/.test(article.excerpt || '') ? { fontFamily: '"Rachana", serif', fontWeight: 500, fontSize: '1.35rem', lineHeight: '1.4' } : {}}
+                className={`text-slate-500 dark:text-slate-400 text-center line-clamp-4 mb-6 leading-relaxed ${/[\u0D00-\u0D7F]/.test(article.excerpt || '') || /[\u0D00-\u0D7F]/.test(article.title) ? 'opacity-100 font-bold' : 'text-xs font-serif italic opacity-80'}`}
+                style={/[\u0D00-\u0D7F]/.test(article.excerpt || '') || /[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '1.7rem', lineHeight: '1.3' } : {}}
               >
                 {article.excerpt}
               </p>
