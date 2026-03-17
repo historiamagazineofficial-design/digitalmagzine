@@ -434,14 +434,7 @@ article[lang="ml"] .prose:not(.poetry-format) p:first-of-type::first-letter {
   font-style: italic;
 }
 
-/* Custom Cursor */
-body {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='3' fill='%232E5BFF'/%3E%3C/svg%3E") 4 4, auto;
-}
 
-a, button, [role="button"], input, textarea, select {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='5' fill='none' stroke='%232E5BFF' stroke-width='2'/%3E%3C/svg%3E") 6 6, pointer;
-}
 
 ::selection {
   background-color: rgba(46, 91, 255, 0.2);
