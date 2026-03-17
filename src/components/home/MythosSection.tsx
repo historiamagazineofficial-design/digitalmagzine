@@ -37,15 +37,15 @@ export default async function MythosSection() {
               src={article.imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'} 
               alt={article.title}
               fill
-              className="object-cover transition-transform duration-[2s] group-hover:scale-105"
+              className="object-cover transition-transform duration-[2s] md:group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8 text-white w-full">
                <span className="inline-block text-[9px] font-bold mb-4 text-[#2E5BFF]">Mythos Selection</span>
-               <h3 className="text-2xl md:text-3xl font-bold font-serif mb-4 group-hover:text-[#2E5BFF] transition-colors leading-tight">
+               <h3 className="text-2xl md:text-3xl font-bold font-serif mb-4 md:group-hover:text-[#2E5BFF] transition-colors leading-tight">
                  {article.title}
                </h3>
-               <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0 transition-transform">
+               <div className="flex items-center gap-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform">
                   <div className="w-8 h-px bg-white/40"></div>
                   <p className="text-[10px] font-bold">Entry of Legend</p>
                </div>

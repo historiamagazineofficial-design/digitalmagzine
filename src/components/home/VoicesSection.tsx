@@ -55,21 +55,21 @@ export default async function VoicesSection() {
             <div key={voice.id} className="flex flex-col md:flex-row gap-12 items-start group">
               <div className="flex-shrink-0 w-full md:w-48 flex flex-col items-center md:items-start text-center md:text-left">
                 {voice.imageUrl && (
-                  <div className="w-20 h-20 rounded-full overflow-hidden mb-4 border border-white/10 group-hover:border-white/30 transition-colors relative">
-                    <Image src={voice.imageUrl} alt={voice.contributor} fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" sizes="80px" />
+                  <div className="w-24 h-24 md:w-20 md:h-20 rounded-full overflow-hidden mb-4 border border-white/10 md:group-hover:border-white/30 transition-colors relative">
+                    <Image src={voice.imageUrl} alt={voice.contributor} fill className="object-cover grayscale-0 md:grayscale md:group-hover:grayscale-0 transition-all duration-700" sizes="(max-width: 768px) 96px, 80px" />
                   </div>
                 )}
-                <h4 className="text-xl font-bold font-serif mb-1 group-hover:text-slate-300 transition-colors">{voice.contributor}</h4>
+                <h4 className="text-xl font-bold font-serif mb-1 md:group-hover:text-slate-300 transition-colors">{voice.contributor}</h4>
                 <p className="text-white/30 text-[9px] font-bold mb-3">{voice.role || 'Contributor'}</p>
-                <div className="h-0.5 w-12 bg-white/20 group-hover:w-16 transition-all duration-500"></div>
+                <div className="h-0.5 w-12 bg-white/20 md:group-hover:w-16 transition-all duration-500"></div>
               </div>
               <div className="flex-1">
                 <p className="font-serif text-3xl md:text-4xl italic leading-tight text-white/90 mb-8 font-light whitespace-pre-wrap">
                   &ldquo;{voice.quote}&rdquo;
                 </p>
-                <div className="inline-flex items-center gap-4 text-[10px] font-bold text-white/40 group-hover:text-white transition-all group/link cursor-default">
+                <div className="inline-flex items-center gap-4 text-[10px] font-bold text-white/40 md:group-hover:text-white transition-all group/link cursor-default">
                   <span>Editorial Signature</span>
-                  <span className="w-8 h-[1px] bg-white/10 group-hover:w-12 group-hover:bg-white transition-all duration-300"></span>
+                  <span className="w-8 h-[1px] bg-white/10 md:group-hover:w-12 md:group-hover:bg-white transition-all duration-300"></span>
                 </div>
               </div>
             </div>

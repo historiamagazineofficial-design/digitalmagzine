@@ -23,7 +23,7 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
               alt={article.title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover bg-gray-100 transition-transform duration-700 group-hover:scale-105"
+              className="object-cover bg-gray-100 transition-transform duration-700 md:group-hover:scale-105"
             />
           </div>
           <span className="absolute top-4 right-4 bg-black text-white text-[9px] font-bold px-3 py-1 rounded-full z-10">
@@ -32,7 +32,7 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
         </div>
         <div className="p-6">
           <p className="text-slate-500 text-[10px] font-bold mb-2">{article.author}</p>
-          <h3 className="font-serif text-xl font-bold leading-snug text-black dark:text-white group-hover:text-slate-600 transition-colors mb-4">
+          <h3 className="font-serif text-xl font-bold leading-snug text-black dark:text-white md:group-hover:text-slate-600 transition-colors mb-4">
             {article.title}
           </h3>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-3 font-serif italic border-l-2 border-black/5 pl-4 ml-1">
@@ -50,13 +50,13 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
   return (
     <Link href={`/article/${article.slug}`} className="flex flex-col gap-6 group cursor-pointer block">
       <div className="relative overflow-hidden rounded-xl aspect-[3/2]">
-         <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+         <div className="absolute inset-0 bg-transparent md:bg-black/5 md:group-hover:bg-transparent transition-colors duration-500 z-10"></div>
         <Image 
           src={article.imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'} 
           alt={article.title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+          className="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-110" 
         />
         <span className="absolute top-4 right-4 z-20 bg-black text-white text-[10px] font-bold px-3 py-1 rounded-full">
             {article.tags?.[0] || article.category}
@@ -64,7 +64,7 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
       </div>
       <div>
         <p className="text-[10px] font-bold text-slate-400 mb-3">{article.author}</p>
-        <h3 className="text-2xl font-bold font-serif mb-4 group-hover:text-slate-600 transition-colors leading-tight text-black dark:text-slate-200">{article.title}</h3>
+        <h3 className="text-2xl font-bold font-serif mb-4 md:group-hover:text-slate-600 transition-colors leading-tight text-black dark:text-slate-200">{article.title}</h3>
         <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm line-clamp-2 italic font-serif opacity-80">{article.excerpt}</p>
       </div>
     </Link>

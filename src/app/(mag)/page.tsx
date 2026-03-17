@@ -5,6 +5,7 @@ import FictionSection from '@/components/home/FictionSection';
 import VoicesSection from '@/components/home/VoicesSection';
 import MythosSection from '@/components/home/MythosSection';
 import RecentPerspectives from '@/components/article/RecentPerspectives';
+import ScrollReveal from '@/components/layout/ScrollReveal';
 import { getAllArticles, getHeroConfig } from '@/lib/api';
 
 export default async function Home() {
@@ -32,13 +33,33 @@ export default async function Home() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-      <HeroSection />
-      <FeaturedRow articles={featuredRowArticles} />
-      <RecentPerspectives articles={recentArticles} />
-      <ArticlesGrid />
-      <FictionSection />
-      <MythosSection />
-      <VoicesSection />
+      <ScrollReveal threshold={0}>
+        <HeroSection />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <FeaturedRow articles={featuredRowArticles} />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <RecentPerspectives articles={recentArticles} />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <ArticlesGrid />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <FictionSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <MythosSection />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <VoicesSection />
+      </ScrollReveal>
     </main>
   );
 }

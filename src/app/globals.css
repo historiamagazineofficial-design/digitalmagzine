@@ -399,7 +399,7 @@ article[lang="ml"] .prose:not(.poetry-format) p:first-of-type::first-letter {
 .prose > p:first-of-type::first-letter {
   float: left;
   font-family: var(--font-logo), serif;
-  font-size: 4.5rem;
+  font-size: clamp(3rem, 15vw, 4.5rem);
   line-height: 1;
   padding-top: 4px;
   padding-right: 12px;
@@ -467,4 +467,27 @@ article[lang="ml"] .prose:not(.poetry-format) p:first-of-type::first-letter {
 
 .animate-fluid-blob-fast {
   animation: fluid-blob 18s infinite reverse ease-in-out;
+}
+
+/* ─── Premium Mobile Interactions ───────────────────────────────────────── */
+
+/* Springy active state for buttons and links - Standard International Feel */
+@media (hover: none) {
+  a:active, 
+  button:active {
+    transform: scale(0.96);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+/* Zero-lag Scroll Reveal */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

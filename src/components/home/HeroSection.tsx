@@ -39,21 +39,21 @@ export default async function HeroSection() {
     <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 pt-12">
       <Link href={`/article/${mainFeature.slug}`} className="lg:col-span-8 group cursor-pointer block">
         <div className="relative overflow-hidden rounded-xl aspect-[4/5] md:aspect-[16/9] mb-6">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-100 md:opacity-60 md:group-hover:opacity-90 transition-opacity duration-500"></div>
           <Image 
             alt={displayTitle}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 66vw"
-            className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110" 
+            className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out md:group-hover:scale-110" 
             src={mainFeature.imageUrl || 'https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=2574'}
           />
           <div className="absolute bottom-0 left-0 p-6 md:p-8 z-20 text-white max-w-2xl">
             <span className="bg-black text-[9px] md:text-[10px] font-bold px-3 py-1 rounded-full mb-3 md:mb-4 inline-block">{'Featured Cover'}</span>
-            <h2 className="text-[1.25rem] sm:text-2xl md:text-[2rem] font-bold mb-3 md:mb-4 leading-tight text-white transition-colors duration-300" style={{ fontFamily: isMalayalam ? '"Gayathri", sans-serif' : 'var(--font-heading)', fontWeight: isMalayalam ? 700 : undefined }}>{displayTitle}</h2>
+            <h2 className="text-[1.25rem] sm:text-2xl md:text-[2rem] font-bold mb-3 md:mb-4 leading-tight text-white md:group-hover:text-slate-100 transition-colors duration-300" style={{ fontFamily: isMalayalam ? '"Gayathri", sans-serif' : 'var(--font-heading)', fontWeight: isMalayalam ? 700 : undefined }}>{displayTitle}</h2>
             <p className="text-sm sm:text-base md:text-lg text-slate-200 mb-5 md:mb-6 font-serif italic line-clamp-3 md:line-clamp-2 opacity-90">{displayExcerpt}</p>
             <div className="flex items-center gap-3 md:gap-4">
-               <div className="w-6 md:w-10 h-[1px] bg-white/40 group-hover:w-12 md:group-hover:w-16 group-hover:bg-white transition-all duration-500"></div>
+               <div className="w-6 md:w-10 h-[1px] bg-white/40 md:group-hover:w-12 lg:group-hover:w-16 md:group-hover:bg-white transition-all duration-500"></div>
                <p className="text-[9px] md:text-[10px] font-bold">{mainFeature.author}</p>
             </div>
           </div>
@@ -64,19 +64,19 @@ export default async function HeroSection() {
         {secondFeature ? (
           <Link href={`/article/${secondFeature.slug}`} className="flex-1 group cursor-pointer block">
             <div className="relative overflow-hidden rounded-xl aspect-square mb-4">
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500 z-10"></div>
+              <div className="absolute inset-0 bg-transparent md:bg-black/20 md:group-hover:bg-black/0 transition-colors duration-500 z-10"></div>
               <Image 
                 alt={secondFeature.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
-                className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105" 
+                className="w-full h-full object-cover transition-transform duration-[2s] md:group-hover:scale-105" 
                 src={secondFeature.imageUrl || 'https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=2574'}
               />
               <div className="absolute top-4 right-4 bg-white/90 dark:bg-slate-900/90 px-3 py-1 rounded text-[10px] font-bold z-20 text-black dark:text-white">
                 {secondFeature.tags[0] || 'Perspective'}
               </div>
             </div>
-            <h3 className="text-2xl font-bold font-serif leading-snug group-hover:text-[#2E5BFF] transition-colors duration-300 dark:text-white">{secondFeature.title}</h3>
+            <h3 className="text-2xl font-bold font-serif leading-snug md:group-hover:text-[#2E5BFF] transition-colors duration-300 dark:text-white">{secondFeature.title}</h3>
             <p className="text-slate-600 dark:text-slate-400 text-sm mt-3 line-clamp-2 leading-relaxed">{secondFeature.excerpt}</p>
           </Link>
         ) : (
