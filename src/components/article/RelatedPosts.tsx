@@ -57,7 +57,10 @@ export default async function RelatedPosts({ currentSlug, category, tags }: Rela
 
             {/* Text */}
             <div>
-              <h4 className="font-serif font-bold text-black dark:text-white leading-tight mb-2 group-hover:text-[#2E5BFF] transition-colors">
+              <h4 
+                className="font-serif font-bold text-black dark:text-white leading-tight mb-2 group-hover:text-[#2E5BFF] transition-colors"
+                style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
+              >
                 {article.title}
               </h4>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-serif italic line-clamp-2 leading-relaxed">
