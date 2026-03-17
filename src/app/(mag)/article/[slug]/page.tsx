@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import ReaderControls from '@/components/article/ReaderControls';
 import LiteratureCircle from '@/components/article/LiteratureCircle';
 import RelatedPosts from '@/components/article/RelatedPosts';
+import ShareBar from '@/components/article/ShareBar';
 import { getArticleBySlug } from '@/lib/api';
 import { ReaderProvider } from '@/hooks/useReader';
 
@@ -84,49 +85,60 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
 
-        {/* Article Body */}
-        <div className="w-full relative article-body-container mx-auto px-6">
-          <div 
-            className={`prose prose-slate dark:prose-invert prose-lg max-w-none font-serif text-slate-800 dark:text-slate-200 mb-20 ${
-              article.tags?.some(tag => ['poem', '#poem', 'poetry', '#poetry'].includes(tag.toLowerCase())) 
-              ? 'poetry-format' 
-              : ''
-            } ${isMalayalam ? '' : 'leading-[1.8]'}`}
-            style={{ fontSize: 'var(--reader-font-size, 1.25rem)' }}
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
-          
-          {/* Hidden author-poet field for the poetry layout to pick up via CSS if needed, 
-              or explicitly rendered if it's poetry */}
+        {/* Article Body Section with Sidebar */}
+        <div className="w-full max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Desktop Sharing Sidebar */}
+          <aside className="lg:col-span-1 hidden lg:block">
+            <div className="sticky top-40">
+              <ShareBar title={article.title} slug={slug} />
+            </div>
+          </aside>
 
+          {/* Body Content */}
+          <div className="lg:col-span-10 xl:col-span-8 xl:col-start-2">
+            <div 
+              className={`prose prose-slate dark:prose-invert prose-lg max-w-none font-serif text-slate-800 dark:text-slate-200 mb-20 ${
+                article.tags?.some(tag => ['poem', '#poem', 'poetry', '#poetry'].includes(tag.toLowerCase())) 
+                ? 'poetry-format' 
+                : ''
+              } ${isMalayalam ? '' : 'leading-[1.8]'}`}
+              style={{ fontSize: 'var(--reader-font-size, 1.25rem)' }}
+              dangerouslySetInnerHTML={{ __html: article.content }}
+            />
 
-          {/* About Author Section */}
-          {(article.authorBio || article.authorImage) && (
-            <div className="mt-16 pt-12 border-t border-black/5 dark:border-white/5 zen-hide">
-              <div className="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
-                {article.authorImage && (
-                  <div className="w-24 h-24 rounded-full overflow-hidden shrink-0 border-2 border-slate-100 dark:border-slate-800 shadow-xl shadow-black/5">
-                    <img 
-                      src={article.authorImage} 
-                      alt={article.author} 
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                    />
+            {/* Mobile Sharing Bar (Horizontal) - Only visible when not in Zen mode */}
+            <div className="lg:hidden mt-12 py-8 border-y border-black/5 dark:border-white/5">
+              <ShareBar title={article.title} slug={slug} />
+            </div>
+            
+            {/* About Author Section */}
+            {(article.authorBio || article.authorImage) && (
+              <div className="mt-16 pt-12 border-t border-black/5 dark:border-white/5 zen-hide">
+                <div className="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
+                  {article.authorImage && (
+                    <div className="w-24 h-24 rounded-full overflow-hidden shrink-0 border-2 border-slate-100 dark:border-slate-800 shadow-xl shadow-black/5">
+                      <img 
+                        src={article.authorImage} 
+                        alt={article.author} 
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <span className="text-[10px] font-bold text-slate-400 mb-2 block">
+                      About the Writer
+                    </span>
+                    <h3 className="text-xl font-bold font-serif mb-3 text-black dark:text-white">
+                      {article.author}
+                    </h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed italic font-serif">
+                      {article.authorBio || "A contributing voice for The Inkspire digital magazine, exploring the deep-dive narratives of history and faith."}
+                    </p>
                   </div>
-                )}
-                <div className="flex-1">
-                  <span className="text-[10px] font-bold text-slate-400 mb-2 block">
-                    About the Writer
-                  </span>
-                  <h3 className="text-xl font-bold font-serif mb-3 text-black dark:text-white">
-                    {article.author}
-                  </h3>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed italic font-serif">
-                    {article.authorBio || "A contributing voice for The Inkspire digital magazine, exploring the deep-dive narratives of history and faith."}
-                  </p>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         <div className="mt-24 zen-hide">

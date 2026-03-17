@@ -138,9 +138,15 @@ export async function getAllArticles(): Promise<Article[]> {
   // Fallback to MongoDB or MOCK
   if (typeof window === 'undefined') {
     try {
+      const { cookies } = await import('next/headers');
+      const cookieStore = await cookies();
+      const session = cookieStore.get('inkspire_session');
+      const isAuthenticated = session?.value === 'authenticated';
+      
       const { dbGetArticles } = await import('@/lib/server-db');
-      return await dbGetArticles();
+      return await dbGetArticles({ status: isAuthenticated ? 'all' : 'Published' });
     } catch (err) {
+      console.error('dbGetArticles (SSG/SSR) Error:', err);
       return MOCK_ARTICLES;
     }
   }
@@ -169,9 +175,15 @@ export async function getArticleBySlug(encodedSlug: string): Promise<Article | u
 
   if (typeof window === 'undefined') {
     try {
+      const { cookies } = await import('next/headers');
+      const cookieStore = await cookies();
+      const session = cookieStore.get('inkspire_session');
+      const isAuthenticated = session?.value === 'authenticated';
+      
       const { dbGetArticleBySlug } = await import('@/lib/server-db');
-      return await dbGetArticleBySlug(slug);
-    } catch {
+      return await dbGetArticleBySlug(slug, !isAuthenticated);
+    } catch (e) {
+      console.error('dbGetArticleBySlug (SSG/SSR) Error:', e);
       return MOCK_ARTICLES.find(a => a.slug === slug);
     }
   }
@@ -199,8 +211,16 @@ export async function getArticlesByCategory(categoryName: string): Promise<Artic
 
   if (typeof window === 'undefined') {
     try {
+      const { cookies } = await import('next/headers');
+      const cookieStore = await cookies();
+      const session = cookieStore.get('inkspire_session');
+      const isAuthenticated = session?.value === 'authenticated';
+
       const { dbGetArticles } = await import('@/lib/server-db');
-      return await dbGetArticles({ category: categoryName });
+      return await dbGetArticles({ 
+        category: categoryName,
+        status: isAuthenticated ? 'all' : 'Published'
+      });
     } catch {
       return MOCK_ARTICLES.filter(a => a.category.toLowerCase() === categoryName.toLowerCase());
     }

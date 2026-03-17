@@ -8,6 +8,7 @@ import type { Article } from '@/lib/api';
 
 export interface ArticleFilter {
   category?: string;
+  status?: string; // 'Published' | 'Draft' | 'all'
 }
 
 // ── ARTICLES ──────────────────────────────────────────────────────
@@ -19,6 +20,13 @@ export async function dbGetArticles(filter: ArticleFilter = {}) {
   const where: Prisma.ArticleWhereInput = {};
   if (filter.category) {
     where.category = { equals: filter.category, mode: 'insensitive' };
+  }
+  
+  // Default to only showing Published unless 'all' or 'Draft' is specifically requested
+  if (filter.status && filter.status !== 'all') {
+    where.status = filter.status;
+  } else if (!filter.status) {
+    where.status = 'Published';
   }
 
   const articles = await prisma.article.findMany({
@@ -35,9 +43,14 @@ export async function dbGetArticles(filter: ArticleFilter = {}) {
   return articles;
 }
 
-export async function dbGetArticleBySlug(slug: string) {
-  const article = await prisma.article.findUnique({
-    where: { slug },
+export async function dbGetArticleBySlug(slug: string, onlyPublished = false) {
+  const where: Prisma.ArticleWhereInput = { slug };
+  if (onlyPublished) {
+    where.status = 'Published';
+  }
+  
+  const article = await prisma.article.findFirst({
+    where,
   });
   return article || undefined;
 }

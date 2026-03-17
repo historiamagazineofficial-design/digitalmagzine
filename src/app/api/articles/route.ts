@@ -50,6 +50,14 @@ export async function GET(req: NextRequest) {
     if (category) where.category = { equals: category, mode: 'insensitive' };
     if (slug) where.slug = slug;
 
+    // SECURITY: Authenticated users (admin) see everything. Public sees only 'Published'.
+    const session = req.cookies.get('inkspire_session');
+    const isAuthenticated = session?.value === 'authenticated';
+    
+    if (!isAuthenticated) {
+      where.status = 'Published';
+    }
+
     const articles = await prisma.article.findMany({
       where,
       orderBy: { createdAt: 'desc' },

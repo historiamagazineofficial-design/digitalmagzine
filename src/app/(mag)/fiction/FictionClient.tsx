@@ -8,10 +8,13 @@ const FICTION_GENRES = ['All', '#Poetry', '#Literature', '#Stories'];
 
 export default function FictionClient({ initialArticles }: { initialArticles: Article[] }) {
   const [activeGenre, setActiveGenre] = useState('All');
+  const [limit, setLimit] = useState(6);
   
   const filtered = activeGenre === 'All'
     ? initialArticles
     : initialArticles.filter(a => a.tags?.includes(activeGenre) || a.category === activeGenre.replace('#', ''));
+
+  const displayArticles = filtered.slice(0, limit);
 
   return (
     <>
@@ -22,7 +25,10 @@ export default function FictionClient({ initialArticles }: { initialArticles: Ar
           {FICTION_GENRES.map((genre) => (
             <button
               key={genre}
-              onClick={() => setActiveGenre(genre)}
+              onClick={() => {
+                setActiveGenre(genre);
+                setLimit(6);
+              }}
               className={`text-[10px] font-bold uppercase tracking-widest transition-all px-4 py-2 rounded-full ${
                 activeGenre === genre
                   ? 'bg-black text-white dark:bg-white dark:text-black'
@@ -36,9 +42,9 @@ export default function FictionClient({ initialArticles }: { initialArticles: Ar
       </div>
 
       {/* Masonry Grid */}
-      {filtered.length > 0 ? (
+      {displayArticles.length > 0 ? (
         <div className="masonry-grid mt-12">
-          {filtered.map((article) => (
+          {displayArticles.map((article) => (
             <div key={article.slug} className="masonry-item">
               <ArticleCard article={article} variant="masonry" />
             </div>
@@ -52,10 +58,13 @@ export default function FictionClient({ initialArticles }: { initialArticles: Ar
         </div>
       )}
 
-      {filtered.length > 0 && (
+      {filtered.length > limit && (
         <div className="flex justify-center mt-24">
-          <button className="group relative px-10 py-4 overflow-hidden rounded-full border border-black/10 dark:border-white/10 text-black dark:text-white font-bold uppercase tracking-[0.3em] text-[10px] transition-all hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
-            <span className="relative z-10">{'View More'}</span>
+          <button 
+            onClick={() => setLimit(prev => prev + 6)}
+            className="group relative px-10 py-4 overflow-hidden rounded-full border border-black/10 dark:border-white/10 text-black dark:text-white font-bold uppercase tracking-[0.3em] text-[10px] transition-all hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+          >
+            <span className="relative z-10">{'Load More Chapters'}</span>
           </button>
         </div>
       )}

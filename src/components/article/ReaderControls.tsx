@@ -1,7 +1,7 @@
 'use client';
 
 import { useReader } from '@/hooks/useReader';
-import { Sun, Moon, BookOpen, Minimize2, Maximize2, Type } from 'lucide-react';
+import { Sun, Moon, BookOpen, Minimize2, Maximize2, Type, Share2 } from 'lucide-react';
 
 export default function ReaderControls() {
   const { theme, setTheme, zenMode, setZenMode, fontSize, setFontSize } = useReader();
@@ -54,6 +54,26 @@ export default function ReaderControls() {
           <Type size={18} />
         </button>
       </div>
+
+      {/* Shared Space / Sharing */}
+      <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-2" />
+      <button 
+        onClick={() => {
+          if (navigator.share) {
+            navigator.share({
+              title: document.title,
+              url: window.location.href
+            }).catch(() => {});
+          } else {
+            // Fallback: scroll to sharing section or show a toast
+            document.querySelector('aside')?.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        className="p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors text-black dark:text-white"
+        title={'Share Article'}
+      >
+        <Share2 size={18} />
+      </button>
 
       <div className="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-2" />
 
