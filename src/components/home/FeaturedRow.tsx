@@ -36,13 +36,12 @@ export default function FeaturedRow({ articles }: FeaturedRowProps) {
                 {article.title}
               </h3>
               
-              {/* Clean white space & minimalist shortened excerpt */}
-              <p 
-                className={`text-slate-500 dark:text-slate-400 text-center line-clamp-4 mb-6 leading-relaxed ${/[\u0D00-\u0D7F]/.test(article.excerpt || '') || /[\u0D00-\u0D7F]/.test(article.title) ? 'opacity-100 font-bold' : 'text-xs font-serif italic opacity-80'}`}
-                style={/[\u0D00-\u0D7F]/.test(article.excerpt || '') || /[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '1.7rem', lineHeight: '1.3' } : {}}
-              >
-                {article.excerpt}
-              </p>
+              {/* Clean white space & minimalist shortened excerpt - Hidden for Malayalam to focus on main title/caption */}
+              {!/[\u0D00-\u0D7F]/.test(article.title) && !/[\u0D00-\u0D7F]/.test(article.excerpt || '') && (
+                <p className="text-xs font-serif italic text-slate-500 dark:text-slate-400 text-center line-clamp-2 mb-6 leading-relaxed opacity-80">
+                  {article.excerpt}
+                </p>
+              )}
               
               <div className="mt-auto pt-4 border-t border-black/5 dark:border-white/5 text-center flex items-center justify-center gap-2">
                 <div className="w-3 h-[1px] bg-[#2E5BFF]/60"></div>

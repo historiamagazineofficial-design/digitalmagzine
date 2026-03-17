@@ -48,10 +48,12 @@ export default async function MythosSection() {
                >
                  {article.title}
                </h3>
-               <div className="flex items-center gap-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform">
-                  <div className="w-8 h-px bg-white/40"></div>
-                  <p className="text-[10px] font-bold">Entry of Legend</p>
-               </div>
+                {!/[\u0D00-\u0D7F]/.test(article.title) && (
+                  <div className="flex items-center gap-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform">
+                     <div className="w-8 h-px bg-white/40"></div>
+                     <p className="text-[10px] font-bold">Entry of Legend</p>
+                  </div>
+                )}
             </div>
           </Link>
         ))}

@@ -60,7 +60,10 @@ export default async function HeroSection() {
             >
               {displayTitle}
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-slate-200 mb-5 md:mb-6 font-serif italic line-clamp-3 md:line-clamp-2 opacity-90">{displayExcerpt}</p>
+            {/* Only show excerpt if not Malayalam title */}
+            {!isMalayalam && (
+              <p className="text-sm sm:text-base md:text-lg text-slate-200 mb-5 md:mb-6 font-serif italic line-clamp-3 md:line-clamp-2 opacity-90">{displayExcerpt}</p>
+            )}
             <div className="flex items-center gap-3 md:gap-4">
                <div className="w-6 md:w-10 h-[1px] bg-white/40 md:group-hover:w-12 lg:group-hover:w-16 md:group-hover:bg-white transition-all duration-500"></div>
                <p className="text-[9px] md:text-[10px] font-bold">{mainFeature.author}</p>
