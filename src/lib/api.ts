@@ -177,7 +177,7 @@ export async function getArticleBySlug(encodedSlug: string): Promise<Article | u
   }
 
   try {
-    const result = await clientFetch<{ success: boolean; data: Article }>(`/api/articles/${slug}`);
+    const result = await clientFetch<{ success: boolean; data: Article }>(`/api/articles/${encodeURIComponent(slug)}`);
     return result.data;
   } catch {
     return MOCK_ARTICLES.find(a => a.slug === slug);
@@ -278,7 +278,7 @@ export async function updateArticle(encodedSlug: string, data: Partial<Article>)
   }
 
   try {
-    const res = await clientFetch<{ success: boolean }>(`/api/articles/${slug}`, {
+    const res = await clientFetch<{ success: boolean }>(`/api/articles/${encodeURIComponent(slug)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -316,7 +316,7 @@ export async function deleteArticle(encodedSlug: string): Promise<boolean> {
   }
 
   try {
-    await clientFetch(`/api/articles/${slug}`, { method: 'DELETE' });
+    await clientFetch(`/api/articles/${encodeURIComponent(slug)}`, { method: 'DELETE' });
     return true;
   } catch (err) {
     console.error('deleteArticle (MongoDB) error:', err);

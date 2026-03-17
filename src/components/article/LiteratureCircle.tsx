@@ -78,7 +78,7 @@ export default function LiteratureCircle({ articleSlug }: { articleSlug: string 
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`/api/comments?article=${articleSlug}`);
+        const res = await fetch(`/api/comments?article=${encodeURIComponent(articleSlug)}`);
         const data = await res.json();
         if (data.success) {
           setComments(data.data);
