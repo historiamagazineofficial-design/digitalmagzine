@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ReaderControls from '@/components/article/ReaderControls';
@@ -6,6 +7,43 @@ import RelatedPosts from '@/components/article/RelatedPosts';
 import ShareBar from '@/components/article/ShareBar';
 import { getArticleBySlug } from '@/lib/api';
 import { ReaderProvider } from '@/hooks/useReader';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const paramsData = await params;
+  const slug = decodeURIComponent(paramsData.slug);
+  const article = await getArticleBySlug(slug);
+
+  if (!article) return {};
+
+  const defaultImage = '/icon-512x512.png';
+  const ogImage = article.imageUrl || defaultImage;
+
+  return {
+    title: article.title,
+    description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt || article.title,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+      type: 'article',
+      publishedTime: article.date,
+      authors: [article.author],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt || article.title,
+      images: [ogImage],
+    },
+  };
+}
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const paramsData = await params;
@@ -77,7 +115,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="w-full max-w-6xl mx-auto px-6 mb-20">
           <div className="relative aspect-[21/9] w-full bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden shadow-2xl shadow-black/5">
             <Image 
-              src={article.imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'} 
+              src={article.imageUrl || '/icon-512x512.png'} 
               alt={article.title} 
               fill 
               className="object-cover transition-transform duration-[3s] hover:scale-105"

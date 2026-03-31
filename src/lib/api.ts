@@ -85,7 +85,7 @@ function mapStrapiToArticle(data: { attributes?: any; id?: string | number }): A
     date: attrs.publishedAt ? new Date(attrs.publishedAt).toLocaleDateString() : 'Recent',
     imageUrl: attrs.image?.data?.attributes?.url 
       ? (`${attrs.image.data.attributes.url.startsWith('http') ? '' : STRAPI_URL}${attrs.image.data.attributes.url}`)
-      : 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop',
+      : '/icon-512x512.png',
     readingTime: attrs.readingTime || '5 min read',
     status: attrs.publishedAt ? 'Published' : 'Draft',
     tags: attrs.tags ? (typeof attrs.tags === 'string' ? attrs.tags.split(',') : attrs.tags) : [],

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: 'Inkspire',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop',
+        url: '/icon-512x512.png',
         width: 1200,
         height: 630,
         alt: 'Inkspire Cover Image',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'THE INKSPIRE',
     description: 'A premium digital sanctuary for Islamic literature',
-    images: ['https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'],
+    images: ['/icon-512x512.png'],
   },
 };
 

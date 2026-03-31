@@ -23,7 +23,7 @@ export default function SpotlightHero({
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] group-hover:scale-110"
-        style={{ backgroundImage: `url(${imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'})` }}
+        style={{ backgroundImage: `url(${imageUrl || '/icon-512x512.png'})` }}
       />
       <div className="absolute inset-0 z-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 

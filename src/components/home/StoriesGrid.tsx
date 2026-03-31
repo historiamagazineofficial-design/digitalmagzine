@@ -14,7 +14,7 @@ function StoryCard({ slug, title, excerpt, category, imageUrl }: StoryCardProps)
     <article className="flex flex-col gap-6 group">
       <Link href={`/article/${slug}`} className="block aspect-[4/5] overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-900 relative">
         <Image
-          src={imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'}
+          src={imageUrl || '/icon-512x512.png'}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

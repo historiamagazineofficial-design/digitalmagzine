@@ -19,7 +19,7 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
         <div className="relative overflow-hidden">
           <div className="aspect-[4/5] w-full relative">
             <Image 
-              src={article.imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'} 
+              src={article.imageUrl || '/icon-512x512.png'} 
               alt={article.title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -55,7 +55,7 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
       <div className="relative overflow-hidden rounded-xl aspect-[3/2]">
          <div className="absolute inset-0 bg-transparent md:bg-black/5 md:group-hover:bg-transparent transition-colors duration-500 z-10"></div>
         <Image 
-          src={article.imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'} 
+          src={article.imageUrl || '/icon-512x512.png'} 
           alt={article.title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"

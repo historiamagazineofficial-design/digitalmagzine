@@ -34,7 +34,7 @@ export default async function MythosSection() {
             className="group block relative overflow-hidden rounded-3xl aspect-[16/10] bg-slate-100 dark:bg-slate-900 shadow-2xl shadow-black/5"
           >
             <Image 
-              src={article.imageUrl || 'https://images.unsplash.com/photo-1555993539-1732b0258235?q=80&w=1200&auto=format&fit=crop'} 
+              src={article.imageUrl || '/icon-512x512.png'} 
               alt={article.title}
               fill
               className="object-cover transition-transform duration-[2s] md:group-hover:scale-105"

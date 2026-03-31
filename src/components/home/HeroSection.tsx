@@ -46,7 +46,7 @@ export default async function HeroSection() {
             priority
             sizes="(max-width: 1024px) 100vw, 66vw"
             className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out md:group-hover:scale-110" 
-            src={mainFeature.imageUrl || 'https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=2574'}
+            src={mainFeature.imageUrl || '/hero-placeholder.jpg'}
           />
           <div className="absolute bottom-0 left-0 p-6 md:p-8 z-20 text-white max-w-2xl">
             <span className="bg-black text-[9px] md:text-[10px] font-bold px-3 py-1 rounded-full mb-3 md:mb-4 inline-block">{'Featured Cover'}</span>
@@ -82,7 +82,7 @@ export default async function HeroSection() {
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 className="w-full h-full object-cover transition-transform duration-[2s] md:group-hover:scale-105" 
-                src={secondFeature.imageUrl || 'https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=2574'}
+                src={secondFeature.imageUrl || '/hero-placeholder.jpg'}
               />
               <div className="absolute top-4 right-4 bg-white/90 dark:bg-slate-900/90 px-3 py-1 rounded text-[10px] font-bold z-20 text-black dark:text-white">
                 {secondFeature.tags[0] || 'Perspective'}

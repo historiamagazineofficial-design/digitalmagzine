@@ -4,7 +4,6 @@
  */
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
-import type { Article } from '@/lib/api';
 
 export interface ArticleFilter {
   category?: string;
@@ -13,7 +12,6 @@ export interface ArticleFilter {
 
 // ── ARTICLES ──────────────────────────────────────────────────────
 
-import { MOCK_ARTICLES } from './api';
 
 export async function dbGetArticles(filter: ArticleFilter = {}) {
   // Map simple filter like {category: '...'} to Prisma where
@@ -34,11 +32,7 @@ export async function dbGetArticles(filter: ArticleFilter = {}) {
     orderBy: { createdAt: 'desc' },
   });
 
-  // Auto-seed if empty
-  if (articles.length === 0 && !Object.keys(where).length) {
-    await dbSeedArticlesIfEmpty(MOCK_ARTICLES);
-    return await prisma.article.findMany({ orderBy: { createdAt: 'desc' } });
-  }
+
 
   return articles;
 }
@@ -74,22 +68,7 @@ export async function dbDeleteArticle(slug: string) {
   });
 }
 
-export async function dbSeedArticlesIfEmpty(mockArticles: Article[]) {
-  const count = await prisma.article.count();
-  if (count === 0) {
-    console.log('Seeding articles into Postgres...');
-    for (const art of mockArticles) {
-      const { _id: _, ...rest } = art;
-      console.log(`Seeding: ${art.slug}`);
-      await prisma.article.create({ 
-        data: {
-          ...rest,
-          tags: rest.tags || []
-        } 
-      });
-    }
-  }
-}
+
 
 // ── VOICES ────────────────────────────────────────────────────────
 
@@ -99,15 +78,7 @@ export async function dbGetVoices() {
   });
 }
 
-export async function dbSeedVoicesIfEmpty(mockVoices: Prisma.VoiceCreateInput[]) {
-  const count = await prisma.voice.count();
-  if (count === 0) {
-    console.log('Seeding voices into Postgres...');
-    for (const v of mockVoices) {
-      await prisma.voice.create({ data: v });
-    }
-  }
-}
+
 
 // ── TAGS ──────────────────────────────────────────────────────────
 
