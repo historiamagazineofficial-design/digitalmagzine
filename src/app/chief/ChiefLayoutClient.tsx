@@ -6,22 +6,23 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
   FileText, PenTool, Mic2, LayoutDashboard, Tags,
   Image as ImageIcon, Star, MessageSquare, Settings,
-  LogOut, Columns, X
+  LogOut, Columns, X, Sun, Moon
 } from 'lucide-react';
+import { useEffect } from 'react';
 
 const NAV_ITEMS = [
-  { icon: LayoutDashboard, label: 'Dashboard',          href: '/admin' },
-  { icon: FileText,        label: 'All Articles',       href: '/admin/articles' },
-  { icon: PenTool,          label: 'New Article',        href: '/admin/articles/new' },
-  { icon: Mic2,            label: 'Voices Editor',      href: '/admin/voices' },
-  { icon: Star,            label: 'Homepage Featured',  href: '/admin/hero' },
-  { icon: Tags,            label: 'Tag Manager',        href: '/admin/tags' },
-  { icon: ImageIcon,       label: 'Media Library',      href: '/admin/media' },
-  { icon: MessageSquare,   label: 'Comments',           href: '/admin/comments' },
-  { icon: Settings,        label: 'Site Settings',      href: '/admin/settings' },
+  { icon: LayoutDashboard, label: 'Dashboard',          href: '/chief' },
+  { icon: FileText,        label: 'All Articles',       href: '/chief/articles' },
+  { icon: PenTool,          label: 'New Article',        href: '/chief/articles/new' },
+  { icon: Mic2,            label: 'Voices Editor',      href: '/chief/voices' },
+  { icon: Star,            label: 'Homepage Editor',    href: '/chief/hero' },
+  { icon: Tags,            label: 'Tag Manager',        href: '/chief/tags' },
+  { icon: ImageIcon,       label: 'Media Library',      href: '/chief/media' },
+  { icon: MessageSquare,   label: 'Comments',           href: '/chief/comments' },
+  { icon: Settings,        label: 'Site Settings',      href: '/chief/settings' },
 ];
 
-export default function AdminLayoutClient({
+export default function ChiefLayoutClient({
   children,
 }: {
   children: React.ReactNode;
@@ -30,16 +31,48 @@ export default function AdminLayoutClient({
   const pathname = usePathname();
   const [isSplit, setIsSplit] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  // Initialize theme
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('admin-theme');
+    if (savedTheme === 'light') {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    } else {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = !isDarkMode;
+    setIsDarkMode(newTheme);
+    if (newTheme) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('admin-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('admin-theme', 'light');
+    }
+  };
 
   const handleLogout = async () => {
     await fetch('/api/logout', { method: 'POST' });
-    router.push('/admin/login');
+    router.push('/chief/login');
   };
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F] text-white flex">
+    <div className={`min-h-screen ${isDarkMode ? 'bg-[#0F0F0F] text-white' : 'bg-slate-50 text-slate-900'} flex transition-colors duration-500`}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .admin-sidebar { background-color: ${isDarkMode ? '#000000' : '#FFFFFF'}; border-color: ${isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'}; }
+        .admin-nav-item.active { background-color: ${isDarkMode ? '#FFFFFF' : '#000000'}; color: ${isDarkMode ? '#000000' : '#FFFFFF'}; }
+        .admin-nav-item.inactive { color: ${isDarkMode ? '#94a3b8' : '#64748b'}; }
+        .admin-nav-item.inactive:hover { background-color: ${isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'}; color: ${isDarkMode ? '#FFFFFF' : '#000000'}; }
+        .admin-content-area { background-color: ${isDarkMode ? '#0F0F0F' : '#F8FAFC'}; }
+      `}} />
       {/* Mobile Top Bar */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-black z-30 flex items-center justify-between px-5 border-b border-white/10">
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white dark:bg-black z-30 flex items-center justify-between px-5 border-b border-black/10 dark:border-white/10">
         <div className="flex items-center gap-2">
           <div style={{ width: '1.6rem', height: '1.6rem', flexShrink: 0 }}>
             <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -51,12 +84,12 @@ export default function AdminLayoutClient({
           </div>
           <div className="flex flex-col leading-none">
             <span className="text-[7px] font-black tracking-[0.25em] text-[#2E5BFF] uppercase">THE</span>
-            <span className="text-base font-black tracking-tight text-white">INKSPIRE</span>
+            <span className="text-base font-black tracking-tight text-slate-900 dark:text-white">INKSPIRE</span>
           </div>
         </div>
         <button 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 bg-white/5 rounded-lg text-white"
+          className="p-2 bg-black/5 dark:bg-white/5 rounded-lg text-slate-900 dark:text-white"
         >
           <LayoutDashboard size={18} />
         </button>
@@ -71,7 +104,7 @@ export default function AdminLayoutClient({
       )}
 
       {/* Sidebar */}
-      <aside className={`w-64 min-h-screen bg-black border-r border-white/5 flex flex-col py-8 px-5 fixed top-0 left-0 z-50 transition-transform duration-300 md:translate-x-0 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`admin-sidebar w-64 min-h-screen border-r flex flex-col py-8 px-5 fixed top-0 left-0 z-50 transition-transform duration-300 md:translate-x-0 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="mb-12 flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
@@ -85,13 +118,13 @@ export default function AdminLayoutClient({
               </div>
               <div className="flex flex-col leading-none">
                 <span className="text-[8px] font-black tracking-[0.25em] text-[#2E5BFF] uppercase">THE</span>
-                <span className="text-lg font-black tracking-tight text-white">INKSPIRE</span>
+                <span className="text-lg font-black tracking-tight text-slate-900 dark:text-white">INKSPIRE</span>
               </div>
             </div>
-            <div className="h-0.5 w-8 bg-white/20"></div>
+            <div className="h-0.5 w-8 bg-black/10 dark:bg-white/20"></div>
             <p className="text-slate-500 text-[10px] uppercase tracking-[0.3em] font-bold mt-4">Command Center</p>
           </div>
-          <button onClick={() => setMobileMenuOpen(false)} className="md:hidden text-white/50 hover:text-white">
+          <button onClick={() => setMobileMenuOpen(false)} className="md:hidden text-slate-500 dark:text-white/50 hover:text-black dark:hover:text-white">
             <X size={20} />
           </button>
         </div>
@@ -103,10 +136,8 @@ export default function AdminLayoutClient({
               <Link
                 key={label}
                 href={href}
-                className={`flex items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-widest font-bold rounded transition-all duration-300 ${
-                  active
-                    ? 'bg-white text-black'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                className={`admin-nav-item flex items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-widest font-bold rounded transition-all duration-300 ${
+                  active ? 'active' : 'inactive'
                 }`}
               >
                 <Icon size={14} />
@@ -116,7 +147,14 @@ export default function AdminLayoutClient({
           })}
         </nav>
 
-        <div className="mt-auto border-t border-white/10 pt-4 flex flex-col gap-2">
+        <div className="mt-auto border-t border-white/10 pt-6 flex flex-col gap-2">
+          <button
+            onClick={toggleTheme}
+            className={`flex items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-widest font-bold rounded transition-colors admin-nav-item inactive`}
+          >
+            {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
+            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
           <button
             onClick={() => setIsSplit(!isSplit)}
             className={`flex items-center gap-3 px-4 py-3 text-[11px] uppercase tracking-widest font-bold rounded transition-colors ${
@@ -140,7 +178,7 @@ export default function AdminLayoutClient({
       </aside>
 
       {/* Main Content Area */}
-      <div className={`flex-1 md:ml-64 mt-16 md:mt-0 min-h-screen transition-all duration-500 ease-in-out ${isSplit ? 'hidden xl:block xl:mr-[400px] 2xl:mr-[500px]' : ''}`}>
+      <div className={`admin-content-area flex-1 md:ml-64 mt-16 md:mt-0 min-h-screen transition-all duration-500 ease-in-out ${isSplit ? 'hidden xl:block xl:mr-[400px] 2xl:mr-[500px]' : ''}`}>
         {children}
       </div>
 

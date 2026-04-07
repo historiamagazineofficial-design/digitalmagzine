@@ -48,9 +48,14 @@ export interface Media {
 
 export interface HeroConfig {
   articleSlug: string;
-  secondarySlug?: string;
+  secondarySlugs?: string[];
   customTitle?: string;
   customExcerpt?: string;
+  featuredSlugs?: string[];
+  perspectiveSlugs?: string[];
+  fictionSlugs?: string[];
+  articleSlugs?: string[];
+  mythosSlugs?: string[];
 }
 
 export interface SiteSettings {
@@ -436,7 +441,7 @@ export async function getHeroConfig(): Promise<HeroConfig> {
       const { dbGetHeroConfig } = await import('@/lib/server-db');
       return await dbGetHeroConfig({ 
         articleSlug: 'the-girls-we-forgot-a-reckoning-with-selective-empathy',
-        secondarySlug: 'twenty-five-held-breaths',
+        secondarySlugs: ['twenty-five-held-breaths'],
       });
     } catch {
       return { articleSlug: '' };

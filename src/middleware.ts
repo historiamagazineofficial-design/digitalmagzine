@@ -5,13 +5,13 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 1. Protect Admin UI Routes
-  if (pathname.startsWith('/admin')) {
+  if (pathname.startsWith('/chief')) {
     // Exception: Allow the login page itself
-    if (pathname === '/admin/login') {
+    if (pathname === '/chief/login') {
       // If we are already logged in and try to access login, redirect to dashboard
       const session = request.cookies.get('inkspire_session');
       if (session && session.value === 'authenticated') {
-        return NextResponse.redirect(new URL('/admin', request.url));
+        return NextResponse.redirect(new URL('/chief', request.url));
       }
       return NextResponse.next();
     }
@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
 
     if (!session || session.value !== 'authenticated') {
       // User is not authenticated, redirect to login
-      const loginUrl = new URL('/admin/login', request.url);
+      const loginUrl = new URL('/chief/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
     }
@@ -67,7 +67,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/admin/:path*',
+    '/chief/:path*',
     '/api/:path*'
   ],
 };

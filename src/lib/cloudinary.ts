@@ -1,11 +1,31 @@
 /**
  * Cloudinary server-side utility
  *
- * Configuration is read automatically from the CLOUDINARY_URL environment
- * variable (format: cloudinary://api_key:api_secret@cloud_name).
- * No manual config call is needed — the SDK handles it.
+ * The Cloudinary v2 SDK does NOT auto-parse CLOUDINARY_URL in Next.js / ESM.
+ * We must explicitly call cloudinary.config() with the parsed credentials.
  */
 import { v2 as cloudinary } from 'cloudinary';
+
+// Parse CLOUDINARY_URL manually.
+// Format: cloudinary://api_key:api_secret@cloud_name
+const rawUrl = process.env.CLOUDINARY_URL;
+if (!rawUrl) {
+  console.warn('[cloudinary] CLOUDINARY_URL is not set. Uploads will fail.');
+} else {
+  try {
+    // Strip the scheme prefix so URL can be parsed
+    const withoutScheme = rawUrl.replace(/^cloudinary:\/\//, '');
+    // Split into credentials and cloud_name on the LAST '@'
+    const lastAt = withoutScheme.lastIndexOf('@');
+    const credentials = withoutScheme.slice(0, lastAt);   // api_key:api_secret
+    const cloud_name  = withoutScheme.slice(lastAt + 1);  // cloud_name
+    const [api_key, api_secret] = credentials.split(':');
+
+    cloudinary.config({ cloud_name, api_key, api_secret, secure: true });
+  } catch {
+    console.error('[cloudinary] Failed to parse CLOUDINARY_URL.');
+  }
+}
 
 export default cloudinary;
 

@@ -1,10 +1,20 @@
 import Link from 'next/link';
-import { getArticlesByCategory } from '@/lib/api';
+import { getArticlesByCategory, getHeroConfig } from '@/lib/api';
 import Image from 'next/image';
 
 export default async function MythosSection() {
   const articles = await getArticlesByCategory('Mythos');
-  const displayArticles = articles.length > 0 ? articles.slice(0, 2) : [];
+  const heroConfig = await getHeroConfig();
+  
+  let displayArticles = articles.length > 0 ? articles.slice(0, 2) : [];
+
+  if (heroConfig.mythosSlugs && heroConfig.mythosSlugs.length > 0) {
+    const specific = heroConfig.mythosSlugs
+      .map(slug => articles.find(a => a.slug === slug))
+      .filter(Boolean)
+      .slice(0, 2);
+    if (specific.length > 0) displayArticles = specific as any;
+  }
 
   if (displayArticles.length === 0) return null;
 

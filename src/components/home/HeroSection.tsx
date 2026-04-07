@@ -10,11 +10,21 @@ export default async function HeroSection() {
   
   const mainFeature = articles.find(a => a.slug === heroConfig.articleSlug) || articles[0];
   
-  // Find secondary: 1. Try manual slug, 2. If same as main or missing, try next most recent article, 3. Fallback to any second article
-  let secondFeature = articles.find(a => a.slug === heroConfig.secondarySlug);
+  // Find secondaries: Try manual slugs list
+  let secondaryArticles: any[] = [];
+  if (heroConfig.secondarySlugs && heroConfig.secondarySlugs.length > 0) {
+    secondaryArticles = heroConfig.secondarySlugs
+      .map(slug => articles.find(a => a.slug === slug))
+      .filter(Boolean) as any[];
+  }
   
-  if (!secondFeature || secondFeature.slug === mainFeature?.slug) {
-    secondFeature = articles.find(a => a.slug !== mainFeature?.slug) || articles[1] || articles[0];
+  // Limit to 3 for the side column stack
+  secondaryArticles = secondaryArticles.slice(0, 3);
+
+  // Auto-fallback if no secondary articles chosen
+  if (secondaryArticles.length === 0) {
+    const fallback = articles.find(a => a.slug !== mainFeature?.slug) || articles[1] || articles[0];
+    if (fallback) secondaryArticles = [fallback];
   }
 
   if (!mainFeature) {
@@ -73,28 +83,28 @@ export default async function HeroSection() {
       </Link>
       
       <div className="lg:col-span-4 flex flex-col gap-8">
-        {secondFeature ? (
-          <Link href={`/article/${secondFeature.slug}`} className="flex-1 group cursor-pointer block">
+        {secondaryArticles.length > 0 ? (
+          <Link href={`/article/${secondaryArticles[0].slug}`} className="flex-1 group cursor-pointer block">
             <div className="relative overflow-hidden rounded-xl aspect-square mb-4">
               <div className="absolute inset-0 bg-transparent md:bg-black/20 md:group-hover:bg-black/0 transition-colors duration-500 z-10"></div>
               <Image 
-                alt={secondFeature.title}
+                alt={secondaryArticles[0].title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 className="w-full h-full object-cover transition-transform duration-[2s] md:group-hover:scale-105" 
-                src={secondFeature.imageUrl || '/hero-placeholder.jpg'}
+                src={secondaryArticles[0].imageUrl || '/hero-placeholder.jpg'}
               />
               <div className="absolute top-4 right-4 bg-white/90 dark:bg-slate-900/90 px-3 py-1 rounded text-[10px] font-bold z-20 text-black dark:text-white">
-                {secondFeature.tags[0] || 'Perspective'}
+                {secondaryArticles[0].category || 'Featured'}
               </div>
             </div>
             <h3 
               className="text-2xl font-bold font-serif leading-snug md:group-hover:text-[#2E5BFF] transition-colors duration-300 dark:text-white"
-              style={/[\u0D00-\u0D7F]/.test(secondFeature.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2.6rem', lineHeight: '1.2' } : {}}
+              style={/[\u0D00-\u0D7F]/.test(secondaryArticles[0].title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2.6rem', lineHeight: '1.2' } : {}}
             >
-              {secondFeature.title}
+              {secondaryArticles[0].title}
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm mt-3 line-clamp-2 leading-relaxed">{secondFeature.excerpt}</p>
+            <p className="text-slate-600 dark:text-slate-400 text-sm mt-3 line-clamp-2 leading-relaxed">{secondaryArticles[0].excerpt}</p>
           </Link>
         ) : (
           <div className="h-full border border-dashed border-white/10 rounded-xl flex items-center justify-center">

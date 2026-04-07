@@ -44,30 +44,43 @@ export default function SiteHeader() {
       if (isScrolled) {
         gsap.to(header, { 
           backgroundColor: 'rgba(var(--background-rgb, 246, 246, 248), 0.9)',
-          backdropFilter: 'blur(14px)',
-          borderBottomColor: 'rgba(23, 84, 207, 0.12)',
-          height: '64px',
+          backdropFilter: 'blur(12px)',
+          borderBottomColor: 'rgba(23, 84, 207, 0.1)',
+          height: '70px',
           duration: 0.4,
           overwrite: 'auto'
         });
-        gsap.to(logo, { scale: 0.78, duration: 0.4, overwrite: 'auto' });
+        gsap.to(logo, { scale: 0.7, y: -4, duration: 0.4, overwrite: 'auto' });
       } else {
         gsap.to(header, { 
           backgroundColor: 'transparent',
           backdropFilter: 'blur(0px)',
           borderBottomColor: 'transparent',
-          height: '100px',
+          height: '110px',
           duration: 0.4,
           overwrite: 'auto'
         });
-        gsap.to(logo, { scale: 1, duration: 0.4, overwrite: 'auto' });
+        gsap.to(logo, { scale: 1, y: 0, duration: 0.4, overwrite: 'auto' });
       }
 
       lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Secret Admin Key Combo (Ctrl + Shift + I or Cmd + Shift + I) to invisibly open admin panel
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'x') {
+        e.preventDefault();
+        window.open('/chief', '_blank');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   return (
@@ -156,7 +169,7 @@ export default function SiteHeader() {
               </nav>
             </div>
             
-            <div ref={logoRef} className="flex items-center justify-center pointer-events-none pt-8 px-4">
+            <div ref={logoRef} className="flex flex-col items-center justify-center pointer-events-none px-4 h-full">
               <Link
                 href="/"
                 className="flex flex-col items-start whitespace-nowrap pointer-events-auto"
@@ -285,14 +298,7 @@ export default function SiteHeader() {
                <p className="text-sm text-slate-500 mb-6 font-serif italic italic font-light leading-relaxed">
                   Curating the archives of humanity with precision and passion.
                 </p>
-               <Link 
-                href="/admin/login" 
-                onClick={() => setMenuOpen(false)} 
-                className="inline-flex items-center gap-2 text-sm font-black text-black dark:text-white hover:gap-4 transition-all"
-              >
-                {'Admin Access'}
-                <ArrowRight size={14} className="ml-1" />
-              </Link>
+
             </div>
           </div>
         </aside>

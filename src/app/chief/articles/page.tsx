@@ -9,7 +9,7 @@ import {
   Plus, Eye, Edit3, Trash2, Loader2
 } from 'lucide-react';
 
-import { getAllArticles, deleteArticle, Article } from '@/lib/api';
+import { getAllArticles, deleteArticle, updateArticle, Article } from '@/lib/api';
 
 const TYPE_COLORS: Record<string, string> = {
   Articles: 'bg-white/10 text-white',
@@ -45,6 +45,18 @@ export default function ArticlesListPage() {
     }
   };
 
+  const handleToggleHomepage = async (slug: string, currentStatus: boolean) => {
+    // Optimistic UI update could be added here, but awaiting for safety is fine
+    const success = await updateArticle(slug, { showOnHomepage: !currentStatus });
+    if (success) {
+      setArticles(prev => prev.map(a => 
+        a.slug === slug ? { ...a, showOnHomepage: !currentStatus } : a
+      ));
+    } else {
+      alert('Failed to update homepage visibility.');
+    }
+  };
+
   const filtered = filter === 'All' ? articles : articles.filter(a => a.category === filter);
 
   if (isLoading) {
@@ -63,7 +75,7 @@ export default function ArticlesListPage() {
           <p className="text-slate-400 text-[9px] uppercase tracking-widest font-bold mt-1">Full inventory of all platform entries.</p>
         </div>
         <Link
-          href="/admin/articles/new"
+          href="/chief/articles/new"
           className="flex items-center gap-2 bg-[#2E5BFF] text-white px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-[#2E5BFF]/80 transition-all shadow-lg shadow-[#2E5BFF]/20"
         >
           <Plus size={14} strokeWidth={3} />
@@ -95,6 +107,7 @@ export default function ArticlesListPage() {
                 <th className="px-8 py-5">Title & Taxonomy</th>
                 <th className="px-8 py-5">Identity</th>
                 <th className="px-8 py-5">Status</th>
+                <th className="px-8 py-5">Homepage</th>
                 <th className="px-8 py-5 text-right">Operations</th>
               </tr>
             </thead>
@@ -129,6 +142,15 @@ export default function ArticlesListPage() {
                       {article.status}
                     </span>
                   </td>
+                  <td className="px-8 py-6">
+                    <button
+                      onClick={() => handleToggleHomepage(article.slug, article.showOnHomepage !== false)}
+                      className={`relative w-11 h-6 rounded-full transition-colors ${article.showOnHomepage !== false ? 'bg-[#2E5BFF]' : 'bg-slate-700'}`}
+                      title={article.showOnHomepage !== false ? "Hide from Homepage" : "Show on Homepage"}
+                    >
+                      <span className={`absolute top-1 bottom-1 w-4 bg-white rounded-full transition-all ${article.showOnHomepage !== false ? 'left-[calc(100%-1.25rem)]' : 'left-1'}`}></span>
+                    </button>
+                  </td>
                   <td className="px-8 py-6 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link 
@@ -139,7 +161,7 @@ export default function ArticlesListPage() {
                         <Eye size={16} />
                       </Link>
                       <Link 
-                        href={`/admin/articles/${article.slug}/edit`} 
+                        href={`/chief/articles/${article.slug}/edit`} 
                         className="p-2 text-slate-500 hover:text-white bg-white/0 hover:bg-white/5 rounded-lg transition-all"
                         title="Edit"
                       >

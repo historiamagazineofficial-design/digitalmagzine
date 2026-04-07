@@ -14,22 +14,33 @@ export default async function Home() {
   
   // Exclude the hero article and items not intended for the homepage
   const mainFeature = articles.find(a => a.slug === heroConfig.articleSlug) || articles[0];
-  let secondFeature = articles.find(a => a.slug === heroConfig.secondarySlug);
-  if (!secondFeature || secondFeature.slug === mainFeature?.slug) {
-    secondFeature = articles.find(a => a.slug !== mainFeature?.slug) || articles[1] || articles[0];
-  }
-
-  const excludeSlugs = [mainFeature?.slug, secondFeature?.slug];
+  const secondarySlugs = heroConfig.secondarySlugs || [];
+  
+  const excludeSlugs = [mainFeature?.slug, ...secondarySlugs];
   const availableArticles = articles.filter(a => !excludeSlugs.includes(a.slug) && a.showOnHomepage !== false);
 
   // Fallback to avoid empty sections when the site has fewer than 7 articles in total
-  const featuredRowArticles = availableArticles.length > 0 
+  let featuredRowArticles = availableArticles.length > 0 
     ? availableArticles.slice(0, 4) 
     : articles.slice(0, 4);
+
+  if (heroConfig.featuredSlugs && heroConfig.featuredSlugs.length > 0) {
+    const specific = heroConfig.featuredSlugs
+      .map(slug => articles.find(a => a.slug === slug))
+      .filter(Boolean);
+    if (specific.length > 0) featuredRowArticles = specific as any;
+  }
     
-  const recentArticles = availableArticles.slice(4, 7).length > 0 
+  let recentArticles = availableArticles.slice(4, 7).length > 0 
     ? availableArticles.slice(4, 7) 
     : articles.slice(0, 3);
+
+  if (heroConfig.perspectiveSlugs && heroConfig.perspectiveSlugs.length > 0) {
+    const specific = heroConfig.perspectiveSlugs
+      .map(slug => articles.find(a => a.slug === slug))
+      .filter(Boolean);
+    if (specific.length > 0) recentArticles = specific as any;
+  }
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">

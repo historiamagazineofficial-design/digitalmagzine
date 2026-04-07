@@ -6,9 +6,17 @@ export default async function ArticlesGrid() {
   const articles = await getArticlesByCategory('Articles');
   const heroConfig = await getHeroConfig();
 
-  const displayArticles = articles
+  let displayArticles = articles
     .filter(a => a.slug !== heroConfig.articleSlug && a.showOnHomepage !== false)
-    .slice(0, 4);
+    .slice(0, 2);
+
+  if (heroConfig.articleSlugs && heroConfig.articleSlugs.length > 0) {
+    const specific = heroConfig.articleSlugs
+      .map(slug => articles.find(a => a.slug === slug))
+      .filter(Boolean)
+      .slice(0, 2);
+    if (specific.length > 0) displayArticles = specific as any;
+  }
 
   return (
     <section className="mb-24">

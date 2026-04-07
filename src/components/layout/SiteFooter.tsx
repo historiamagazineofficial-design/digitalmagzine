@@ -64,9 +64,7 @@ export default function SiteFooter() {
             © {new Date().getFullYear()} THE INKSPIRE. {'ALL RIGHTS RESERVED.'}
           </div>
           
-          <div className="flex gap-8 text-[10px] font-bold text-slate-400">
-             <Link href="/admin" className="hover:text-black dark:hover:text-white transition-colors">{'Admin Access'}</Link>
-          </div>
+
         </div>
       </div>
     </footer>

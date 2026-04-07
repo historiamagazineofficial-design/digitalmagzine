@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Share2, Twitter, Facebook, Link as LinkIcon, Check, MessageCircle } from 'lucide-react';
 
 interface ShareBarProps {
@@ -10,7 +10,12 @@ interface ShareBarProps {
 
 export default function ShareBar({ title, slug }: ShareBarProps) {
   const [copied, setCopied] = useState(false);
-  const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/article/${slug}` : '';
+  const [shareUrl, setShareUrl] = useState('');
+  
+  useEffect(() => {
+    setShareUrl(`${window.location.origin}/article/${slug}`);
+  }, [slug]);
+
   const text = `Read "${title}" on THE INKSPIRE`;
 
   const copyToClipboard = () => {

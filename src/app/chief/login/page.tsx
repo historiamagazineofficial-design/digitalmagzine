@@ -5,16 +5,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { BookOpen, Fingerprint, Key, Shield, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'inkspire2026';
-
 function AdminLoginContent() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/admin';
+  const callbackUrl = searchParams.get('callbackUrl') || '/chief';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

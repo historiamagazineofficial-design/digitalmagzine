@@ -135,7 +135,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {/* Body Content */}
           <div className="lg:col-span-10 xl:col-span-8 xl:col-start-2">
             <div 
-              className={`prose prose-slate dark:prose-invert prose-lg max-w-none font-serif text-slate-800 dark:text-slate-200 mb-20 ${
+              className={`prose prose-slate dark:prose-invert prose-lg max-w-none font-serif text-slate-800 dark:text-slate-200 mb-20 prose-h3:text-[1.75rem] prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4 prose-h3:leading-[1.2] ${
                 article.tags?.some(tag => ['poem', '#poem', 'poetry', '#poetry'].includes(tag.toLowerCase())) 
                 ? 'poetry-format' 
                 : ''

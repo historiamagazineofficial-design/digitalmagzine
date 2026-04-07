@@ -6,10 +6,17 @@ export default async function FictionSection() {
   const articles = await getArticlesByCategory('Fiction');
   const heroConfig = await getHeroConfig();
   
-  // Exclude the hero article and non-homepage items, limit to 2
-  const fictionArticles = articles
+  let fictionArticles = articles
     .filter(a => a.slug !== heroConfig.articleSlug && a.showOnHomepage !== false)
     .slice(0, 2);
+    
+  if (heroConfig.fictionSlugs && heroConfig.fictionSlugs.length > 0) {
+    const specific = heroConfig.fictionSlugs
+      .map(slug => articles.find(a => a.slug === slug))
+      .filter(Boolean)
+      .slice(0, 2);
+    if (specific.length > 0) fictionArticles = specific as any;
+  }
   
   if (fictionArticles.length === 0) return null;
 

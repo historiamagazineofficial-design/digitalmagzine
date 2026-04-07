@@ -426,7 +426,13 @@ article[lang="ml"] .prose:not(.poetry-format) p:first-of-type::first-letter {
   width: 100%;
 }
 .prose h2 { margin-top: 2.5em; margin-bottom: 1em; }
-.prose h3 { margin-top: 2em; margin-bottom: 0.75em; }
+.prose h3 { 
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1.25rem !important;
+  line-height: 1.2 !important;
+}
 .prose p { margin-bottom: 1.5em; }
 .prose blockquote {
   border-left: 3px solid #2E5BFF;

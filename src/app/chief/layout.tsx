@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import AdminLayoutClient from './AdminLayoutClient';
+import ChiefLayoutClient from './ChiefLayoutClient';
 import '../globals.css';
 
 export const metadata: Metadata = {
@@ -15,9 +15,9 @@ export default function AdminLayout({
   return (
     <html lang="en">
       <body className="bg-black antialiased">
-        <AdminLayoutClient>
+        <ChiefLayoutClient>
           {children}
-        </AdminLayoutClient>
+        </ChiefLayoutClient>
       </body>
     </html>
   );

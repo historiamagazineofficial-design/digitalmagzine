@@ -58,13 +58,18 @@ model SiteSettings {
 }
 
 model HeroConfig {
-  id            String   @id @default(cuid())
-  articleSlug   String   @default("architecture-of-silence")
-  customTitle   String   @default("")
-  customExcerpt String   @default("")
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  secondarySlug String   @default("")
+  id               String   @id @default(cuid())
+  articleSlug      String   @default("architecture-of-silence")
+  customTitle      String   @default("")
+  customExcerpt    String   @default("")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  featuredSlugs    String[] @default([])
+  fictionSlugs     String[] @default([])
+  perspectiveSlugs String[] @default([])
+  articleSlugs     String[] @default([])
+  mythosSlugs      String[] @default([])
+  secondarySlugs   String[] @default([])
 }
 
 model Comment {
