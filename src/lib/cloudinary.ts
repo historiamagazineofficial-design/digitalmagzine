@@ -13,17 +13,33 @@ if (!rawUrl) {
   console.warn('[cloudinary] CLOUDINARY_URL is not set. Uploads will fail.');
 } else {
   try {
-    // Strip the scheme prefix so URL can be parsed
-    const withoutScheme = rawUrl.replace(/^cloudinary:\/\//, '');
-    // Split into credentials and cloud_name on the LAST '@'
-    const lastAt = withoutScheme.lastIndexOf('@');
-    const credentials = withoutScheme.slice(0, lastAt);   // api_key:api_secret
-    const cloud_name  = withoutScheme.slice(lastAt + 1);  // cloud_name
-    const [api_key, api_secret] = credentials.split(':');
+    const url = new URL(rawUrl);
+    const cloud_name = url.hostname;
+    const api_key = url.username;
+    const api_secret = url.password;
+
+    if (!cloud_name || !api_key || !api_secret) {
+      throw new Error('Missing components in CLOUDINARY_URL');
+    }
 
     cloudinary.config({ cloud_name, api_key, api_secret, secure: true });
-  } catch {
-    console.error('[cloudinary] Failed to parse CLOUDINARY_URL.');
+    // console.log(`[cloudinary] Configured for cloud: ${cloud_name}`);
+  } catch (err) {
+    console.error('[cloudinary] Failed to parse CLOUDINARY_URL:', err instanceof Error ? err.message : err);
+    
+    // Fallback to manual parsing if URL constructor fails for non-standard schemes
+    try {
+      const withoutScheme = rawUrl.replace(/^cloudinary:\/\//, '');
+      const lastAt = withoutScheme.lastIndexOf('@');
+      if (lastAt !== -1) {
+        const credentials = withoutScheme.slice(0, lastAt);
+        const cloud_name  = withoutScheme.slice(lastAt + 1);
+        const [api_key, api_secret] = credentials.split(':');
+        cloudinary.config({ cloud_name, api_key, api_secret, secure: true });
+      }
+    } catch (e) {
+      console.error('[cloudinary] Terminal config failure');
+    }
   }
 }
 
@@ -41,13 +57,14 @@ export async function uploadToCloudinary(
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         folder,
-        public_id: `${Date.now()}-${filename.replace(/\.[^/.]+$/, '')}`,
+        public_id: `${Date.now()}-${filename.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
         resource_type: 'auto',
         overwrite: false,
       },
       (error, result) => {
         if (error || !result) {
-          reject(error ?? new Error('Cloudinary upload failed'));
+          console.error('[cloudinary] Upload execution error:', error);
+          reject(error ?? new Error('Cloudinary upload reached terminal failure state.'));
         } else {
           resolve({
             url: result.secure_url,

@@ -32,35 +32,39 @@ export default function SiteHeader() {
 
       // Header Show/Hide: hide immediately when scrolling down past 50px; always show at top
       if (isAtTop) {
-        gsap.to(header, { yPercent: 0, duration: 0.35, ease: 'power3.out', overwrite: true });
+        gsap.to(header, { yPercent: 0, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
       } else if (isScrollingDown && currentScrollY > 50) {
-        gsap.to(header, { yPercent: -100, duration: 0.35, ease: 'power3.out', overwrite: true });
+        gsap.to(header, { yPercent: -100, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
       } else if (!isScrollingDown) {
-        gsap.to(header, { yPercent: 0, duration: 0.35, ease: 'power3.out', overwrite: true });
+        gsap.to(header, { yPercent: 0, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
       }
 
       // Glassmorphism & Logo scaling: activate after just 20px of scroll
       const isScrolled = currentScrollY > 20;
       if (isScrolled) {
         gsap.to(header, { 
-          backgroundColor: 'rgba(var(--background-rgb, 246, 246, 248), 0.9)',
-          backdropFilter: 'blur(12px)',
-          borderBottomColor: 'rgba(23, 84, 207, 0.1)',
-          height: '70px',
-          duration: 0.4,
+          backgroundColor: 'rgba(var(--background-rgb), 0.98)',
+          backdropFilter: 'blur(20px)',
+          borderBottomColor: 'rgba(99, 102, 241, 0.1)',
+          height: '75px',
+          duration: 0.5,
+          ease: 'power2.out',
           overwrite: 'auto'
         });
-        gsap.to(logo, { scale: 0.7, y: -4, duration: 0.4, overwrite: 'auto' });
+        gsap.to(logo, { scale: 0.8, y: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+        header.classList.add('header-scrolled');
       } else {
         gsap.to(header, { 
-          backgroundColor: 'transparent',
+          backgroundColor: 'rgba(var(--background-rgb, 19, 20, 31), 0)', // Use a default dark rgb in case it's not set
           backdropFilter: 'blur(0px)',
           borderBottomColor: 'transparent',
           height: '110px',
-          duration: 0.4,
+          duration: 0.5,
+          ease: 'power2.out',
           overwrite: 'auto'
         });
-        gsap.to(logo, { scale: 1, y: 0, duration: 0.4, overwrite: 'auto' });
+        gsap.to(logo, { scale: 1, y: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+        header.classList.remove('header-scrolled');
       }
 
       lastScrollY.current = currentScrollY;
@@ -177,7 +181,7 @@ export default function SiteHeader() {
               >
                 {/* THE — Small, Montserrat Black, above "INK" */}
                 <span
-                  className="text-[#1A1A1A] dark:text-slate-100 transition-colors uppercase select-none"
+                  className="text-white/90 [.header-scrolled_&]:text-[#0F172A] dark:[.header-scrolled_&]:text-white transition-colors uppercase select-none"
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
                     fontWeight: 900,
@@ -196,8 +200,12 @@ export default function SiteHeader() {
                   className="flex items-center font-black font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
                   style={{ letterSpacing: '-0.02em', lineHeight: 1 }}
                 >
-                  {/* IN — Matte Black */}
-                  <span className="text-[#1A1A1A] dark:text-slate-100 transition-colors">IN</span>
+                  {/* IN — Enhanced with Deep Ink & Cobalt Gradient */}
+                  <span 
+                    className="transition-all duration-700 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-slate-400 [.header-scrolled_&]:from-[#0F172A] [.header-scrolled_&]:via-[#1E1B4B] [.header-scrolled_&]:to-[#4F46E5] dark:[.header-scrolled_&]:from-white dark:[.header-scrolled_&]:via-white dark:[.header-scrolled_&]:to-[#6366F1]"
+                  >
+                    IN
+                  </span>
 
                   {/* Reversed K — Electric Cobalt Blue */}
                   <div

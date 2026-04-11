@@ -21,10 +21,17 @@ export async function POST(req: NextRequest) {
     console.log(`[UPLOAD] Starting: ${file.name}, Size: ${(file.size / 1024 / 1024).toFixed(2)} MB`);
 
     // Validate file type
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
+    const allowedTypes = [
+      'image/jpeg', 
+      'image/jpg', 
+      'image/png', 
+      'image/webp', 
+      'image/gif', 
+      'image/svg+xml'
+    ];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { success: false, error: 'Only image files are allowed (JPEG, PNG, WebP, GIF, SVG).' },
+        { success: false, error: `Type "${file.type}" not allowed. Only JPEG, PNG, WebP, GIF, SVG.` },
         { status: 400 }
       );
     }
@@ -34,11 +41,14 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(arrayBuffer);
 
     // Upload to Cloudinary
+    console.log(`[UPLOAD] Processing through Cloudinary SDK for: ${file.name}`);
     const { url, publicId, bytes } = await uploadToCloudinary(
       buffer,
       file.name,
       'the-inkspire'
     );
+
+    console.log(`[UPLOAD] Cloudinary Response: ${publicId}`);
 
     // Format size as human-readable
     const sizeInMB = (bytes / (1024 * 1024)).toFixed(2);
@@ -56,9 +66,16 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, data: media }, { status: 201 });
   } catch (err) {
-    console.error('UPLOAD_ERROR:', err);
+    console.error('[CRITICAL_UPLOAD_FAILURE]:', err);
+    // Explicitly handle common Cloudinary error strings if they appeared in logs
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    
     return NextResponse.json(
-      { success: false, error: err instanceof Error ? err.message : 'Upload failed' },
+      { 
+        success: false, 
+        error: errorMessage,
+        tip: 'Check your file size (under 10MB) and CLOUDINARY_URL format.'
+      },
       { status: 500 }
     );
   }

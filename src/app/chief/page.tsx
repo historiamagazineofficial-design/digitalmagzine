@@ -183,7 +183,9 @@ export default function AdminDashboard() {
                     <span className={`inline-block text-[10px] px-3 py-1 rounded-full uppercase tracking-wider font-bold ${
                       article.status === 'Published'
                         ? 'bg-green-900/30 text-green-400'
-                        : 'bg-yellow-900/30 text-yellow-400'
+                        : article.status?.toLowerCase().includes('fail')
+                          ? 'bg-red-900/40 text-red-400 border border-red-500/20'
+                          : 'bg-yellow-900/30 text-yellow-400'
                     }`}>
                       {article.status}
                     </span>

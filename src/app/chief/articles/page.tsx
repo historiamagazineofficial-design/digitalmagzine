@@ -137,7 +137,11 @@ export default function ArticlesListPage() {
                   </td>
                   <td className="px-8 py-6">
                     <span className={`text-[9px] font-bold uppercase tracking-widest ${
-                      article.status === 'Published' ? 'text-green-500' : 'text-yellow-500'
+                      article.status === 'Published' 
+                        ? 'text-green-500' 
+                        : article.status?.toLowerCase().includes('fail')
+                          ? 'text-red-500 font-black flex items-center gap-1'
+                          : 'text-yellow-500'
                     }`}>
                       {article.status}
                     </span>

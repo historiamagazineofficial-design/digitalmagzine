@@ -300,12 +300,25 @@ article[lang="ml"] .prose:not(.poetry-format) p:first-of-type::first-letter {
 /* Body Text (Clean Wall of Text) */
 :lang(en) .prose {
   font-family: var(--font-en-body) !important;
-  text-align: justify !important;
-  hyphens: auto !important;
   line-height: 1.5 !important;
   font-size: var(--reader-font-size, 1.25rem) !important;
-  font-weight: 500 !important; /* Decreased boldness for a more graceful look */
-  white-space: pre-wrap !important; /* Honor manual breaks and spacing */
+  font-weight: 500 !important;
+  white-space: pre-wrap !important;
+}
+
+:lang(en) .prose p {
+  text-align: justify !important;
+  hyphens: auto !important;
+}
+
+:lang(en) .prose h1,
+:lang(en) .prose h2,
+:lang(en) .prose h3,
+:lang(en) .prose h4 {
+  text-align: left !important;
+  text-justify: none !important;
+  hyphens: none !important;
+  word-spacing: normal !important;
 }
 
 /* 2. International Poetry Format (English) */
@@ -432,12 +445,16 @@ article[lang="ml"] .prose:not(.poetry-format) p:first-of-type::first-letter {
   margin-top: 2.5rem !important;
   margin-bottom: 1.25rem !important;
   line-height: 1.2 !important;
+  text-align: left !important;
 }
 .prose p { margin-bottom: 1.5em; }
 .prose blockquote {
-  border-left: 3px solid #2E5BFF;
-  padding-left: 1.25rem;
+  border-left: 5px solid #6366F1;
+  padding-left: 1.5rem;
   font-style: italic;
+  font-weight: 700;
+  color: #4F46E5;
+  background-color: rgba(99, 102, 241, 0.03);
 }
 
 

@@ -9,7 +9,7 @@ export default function QuoteSection({ quote, attribution }: QuoteSectionProps) 
       {/* Quote icon using unicode instead of material-symbols for reliability */}
       <span className="text-5xl text-[#2E5BFF]/40 mb-6 leading-none font-serif select-none">&ldquo;</span>
       <blockquote className="max-w-4xl">
-        <p className="text-3xl md:text-4xl font-serif italic font-light text-slate-800 dark:text-slate-200 leading-relaxed">
+        <p className="text-3xl md:text-4xl font-serif italic font-medium text-[#4F46E5] leading-relaxed">
           {quote}
         </p>
         <cite className="block mt-8 text-xs font-bold tracking-[0.3em] uppercase text-[#2E5BFF] not-italic">

@@ -1,19 +1,41 @@
-const { Pool } = require('pg');
 
-const pool = new Pool({ 
-  connectionString: 'postgresql://neondb_owner:npg_8IB6YotGzPLx@ep-dark-hat-a1w02iay-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require' 
-});
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-async function run() {
-  const artRes = await pool.query('SELECT slug, title FROM "Article"');
-  console.log("--- EXISTING ARTICLES ---");
-  artRes.rows.forEach(r => console.log(`Slug: ${r.slug} | Title: ${r.title}`));
+async function main() {
+  const articles = await prisma.article.findMany({
+    select: {
+      slug: true,
+      title: true,
+      status: true
+    }
+  });
+  console.log('Articles status counts:');
+  const counts = articles.reduce((acc, a) => {
+    acc[a.status] = (acc[a.status] || 0) + 1;
+    return acc;
+  }, {});
+  console.log(counts);
+  
+  const failedArticles = articles.filter(a => a.status.toLowerCase().includes('fail'));
+  if (failedArticles.length > 0) {
+    console.log('Articles with fail status:');
+    console.log(failedArticles);
+  } else {
+    console.log('No articles with "fail" status found.');
+  }
 
-  const confRes = await pool.query('SELECT * FROM "HeroConfig"');
-  console.log("\n--- CURRENT HERO CONFIG ---");
-  console.log(JSON.stringify(confRes.rows, null, 2));
+  const comments = await prisma.comment.findMany();
+  const cCounts = comments.reduce((acc, c) => {
+    acc[c.status] = (acc[c.status] || 0) + 1;
+    return acc;
+  }, {});
+  console.log('Comments status counts:', cCounts);
 
-  await pool.end();
+  const media = await prisma.media.findMany();
+  console.log('Total media items:', media.length);
 }
 
-run().catch(console.error);
+main()
+  .catch(e => console.error(e))
+  .finally(async () => await prisma.$disconnect());

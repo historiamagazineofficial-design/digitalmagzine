@@ -59,29 +59,40 @@ export default function NewArticlePage() {
     }
 
     setIsSaving(true);
+    setSaved(false);
     
-    // Auto-generate slug if not provided (Strapi usually handles this, but good for validation)
-    const slug = form.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-    
-    const success = await createArticle({
-      ...form,
-      category: form.type, // Map UI 'type' to DB 'category'
-      slug,
-      tags,
-      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-      readingTime: `${Math.ceil(form.content.split(' ').length / 200)} min read`
-    });
+    try {
+      // Auto-generate slug if not provided
+      const slug = form.title.toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+      
+      const success = await createArticle({
+        ...form,
+        category: form.type, // Map UI 'type' to DB 'category'
+        slug,
+        tags,
+        date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+        readingTime: `${Math.ceil(form.content.split(' ').length / 200)} min read`
+      });
 
-    if (success) {
-      setSaved(true);
-      setTimeout(() => {
-        router.push('/chief');
-        router.refresh();
-      }, 1500);
-    } else {
-      alert('Failed to save article. Please check your connection or API token.');
+      if (success) {
+        setSaved(true);
+        setTimeout(() => {
+          router.push('/chief');
+          router.refresh();
+        }, 1500);
+      } else {
+        throw new Error('Save operation failed on server');
+      }
+    } catch (err) {
+      console.error('[ARTICLE_CREATE_ERROR]:', err);
+      alert('Failed to create article. Please check your connection or database configuration.');
+    } finally {
+      setIsSaving(false);
     }
-    setIsSaving(false);
   };
 
   return (

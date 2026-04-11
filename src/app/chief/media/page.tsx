@@ -31,6 +31,7 @@ export default function MediaLibraryPage() {
     if (files.length === 0) return;
 
     setIsUploading(true);
+    let errorCount = 0;
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -47,22 +48,34 @@ export default function MediaLibraryPage() {
 
         const data = await res.json();
         if (!res.ok || !data.success) {
-          alert(`Failed to upload ${file.name}: ${data.error ?? 'Unknown error'}`);
+          const errMsg = data.error || 'Unknown server error';
+          console.error(`Upload failed for ${file.name}:`, errMsg);
+          alert(`Failed to upload ${file.name}: ${errMsg}`);
+          errorCount++;
+          // We keep going for other files but mark that an error occurred
         }
       } catch (err) {
-        console.error('Upload error:', err);
-        alert(`Error uploading ${file.name}`);
+        console.error(`Upload error for ${file.name}:`, err);
+        alert(`Failed to upload ${file.name}: Physical network error or request aborted.`);
+        errorCount++;
       }
     }
 
-    // Reset file input and refresh list
+    if (errorCount > 0) {
+      // Refresh media list even if some failed
+      const updated = await getMedia();
+      setMediaItems(updated);
+      alert(`${errorCount} file(s) failed to upload. Please check the server logs or try smaller files.`);
+    } else {
+      // Refresh media list on success
+      const updated = await getMedia();
+      setMediaItems(updated);
+    }
+
+    // Reset file input
     if (fileInputRef.current) fileInputRef.current.value = '';
     setUploadProgress(null);
     setIsUploading(false);
-
-    // Refresh media list
-    const updated = await getMedia();
-    setMediaItems(updated);
   };
 
   const [deletingId, setDeletingId] = useState<string | null>(null);

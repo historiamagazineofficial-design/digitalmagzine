@@ -87,26 +87,34 @@ export default function EditArticlePage() {
     }
 
     setIsSaving(true);
+    setSaved(false);
     
-    // Explicitly destructure form to ensure we send correct fields
-    const { type, ...rest } = form;
-    
-    const success = await updateArticle(slug, {
-      ...rest,
-      category: type,
-      tags,
-    });
+    try {
+      // Explicitly destructure form to ensure we send correct fields
+      const { type, ...rest } = form;
+      
+      const success = await updateArticle(slug, {
+        ...rest,
+        category: type,
+        tags,
+      });
 
-    if (success) {
-      setSaved(true);
-      setTimeout(() => {
-        router.push('/chief');
-        router.refresh();
-      }, 1500);
-    } else {
-      alert('Failed to update article. Please check your connection or API token.');
+      if (success) {
+        setSaved(true);
+        // We don't necessarily need to push back immediately, let the user see the "Updated!" state
+        setTimeout(() => {
+          setSaved(false);
+          router.refresh();
+        }, 3000);
+      } else {
+        throw new Error('Server responded with failure');
+      }
+    } catch (err) {
+      console.error('[ARTICLE_UPDATE_ERROR]:', err);
+      alert('Failed to update article. Please check the network context or database state.');
+    } finally {
+      setIsSaving(false);
     }
-    setIsSaving(false);
   };
 
   if (isLoading) {

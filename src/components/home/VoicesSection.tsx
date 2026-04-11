@@ -64,7 +64,7 @@ export default async function VoicesSection() {
                 <div className="h-0.5 w-12 bg-white/20 md:group-hover:w-16 transition-all duration-500"></div>
               </div>
               <div className="flex-1">
-                <p className="font-serif text-3xl md:text-4xl italic leading-tight text-white/90 mb-8 font-light whitespace-pre-wrap">
+                <p className="font-serif text-3xl md:text-4xl italic leading-tight text-[#6366F1] mb-8 font-medium whitespace-pre-wrap">
                   &ldquo;{voice.quote}&rdquo;
                 </p>
                 <div className="inline-flex items-center gap-4 text-[10px] font-bold text-white/40 md:group-hover:text-white transition-all group/link cursor-default">

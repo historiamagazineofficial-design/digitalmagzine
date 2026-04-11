@@ -51,6 +51,7 @@ export default function HeroConfigPage() {
 
   const handleSave = async () => {
     setIsSaving(true);
+    setSaved(false);
     try {
       const { success, error } = await saveHeroConfig(focusConfig);
       if (success) {
@@ -58,10 +59,12 @@ export default function HeroConfigPage() {
         router.refresh(); 
         setTimeout(() => setSaved(false), 3000);
       } else {
-        alert(error || 'Failed to apply changes. Please check if the slugs exist.');
+        console.error('[HERO_CONFIG_ERROR]:', error);
+        alert(error || 'Failed to apply changes. Please verify that the specified slugs exist in the archives.');
       }
     } catch (err) {
-      alert('Error updating configuration.');
+      console.error('[HERO_CONFIG_CATCH]:', err);
+      alert('An unexpected error occurred while updating the configuration.');
     } finally {
       setIsSaving(false);
     }
