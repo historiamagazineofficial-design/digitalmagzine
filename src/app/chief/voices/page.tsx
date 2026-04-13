@@ -108,7 +108,7 @@ export default function VoicesEditorPage() {
               <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => startEdit(voice)}
-                  className="text-slate-500 hover:text-[#2E5BFF] transition-colors p-1"
+                  className="text-slate-500 hover:text-[#07308D] transition-colors p-1"
                   title="Edit Voice"
                 >
                   <Edit2 size={15} />
@@ -129,7 +129,7 @@ export default function VoicesEditorPage() {
         {adding ? (
           <div className="p-8 bg-white/5 border border-white/10 rounded-2xl space-y-8 shadow-2xl backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-1 h-4 bg-[#2E5BFF] rounded-full"></div>
+              <div className="w-1 h-4 bg-[#07308D] rounded-full"></div>
               <p className="text-xs uppercase tracking-[0.2em] text-white/50 font-bold">
                 {editingId ? 'Edit Registry Entry' : 'New Registry Entry'}
               </p>
@@ -143,7 +143,7 @@ export default function VoicesEditorPage() {
               ].map(field => (
                 <div key={field.key} className="space-y-2">
                   <label className="block text-[10px] text-slate-500 uppercase tracking-widest font-bold font-sans">{field.label}</label>
-                  <div className={`flex items-center bg-black/40 border border-white/10 rounded-xl focus-within:border-[#2E5BFF] transition-all ${field.isImage ? 'pr-1' : ''}`}>
+                  <div className={`flex items-center bg-black/40 border border-white/10 rounded-xl focus-within:border-[#07308D] transition-all ${field.isImage ? 'pr-1' : ''}`}>
                     <input
                       type="text"
                       placeholder={field.placeholder}
@@ -172,7 +172,7 @@ export default function VoicesEditorPage() {
                   placeholder="The voice's defining statement..."
                   value={newVoice.quote}
                   onChange={e => setNewVoice({ ...newVoice, quote: e.target.value })}
-                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white text-sm placeholder-slate-700 focus:outline-none focus:border-[#2E5BFF] transition-all resize-none italic font-serif leading-relaxed"
+                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white text-sm placeholder-slate-700 focus:outline-none focus:border-[#07308D] transition-all resize-none italic font-serif leading-relaxed"
                 />
               </div>
             </div>

@@ -30,10 +30,10 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-300 shadow-inner"
+      className="p-1.5 sm:p-2.5 rounded-xl bg-[#07308D]/5 dark:bg-[#07308D]/10 text-slate-600 dark:text-slate-300 hover:bg-[#07308D]/15 transition-all duration-300 shadow-sm border border-[#07308D]/10"
       aria-label="Toggle theme"
     >
-      {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+      {theme === 'light' ? <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-current" /> : <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-current" />}
     </button>
   );
 }

@@ -60,11 +60,11 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-xl" onClick={onClose} />
 
       {/* Search Panel */}
-      <div className="relative z-10 w-full max-w-3xl mx-auto mt-24 px-4">
+      <div className="relative z-10 w-full max-w-3xl mx-auto mt-4 sm:mt-24 px-2 sm:px-4">
         {/* Search Input */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-black/30 border border-black/5 dark:border-white/10 overflow-hidden">
-          <div className="flex items-center gap-4 px-6 py-5 border-b border-black/5 dark:border-white/5">
-            <Search size={20} className="text-slate-400 shrink-0" />
+        <div className="bg-white dark:bg-slate-900 rounded-lg sm:rounded-2xl shadow-2xl shadow-black/30 border border-black/5 dark:border-white/10 overflow-hidden">
+          <div className="flex items-center gap-2 sm:gap-4 px-4 py-3 sm:px-6 sm:py-5 border-b border-black/5 dark:border-white/5">
+            <Search className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0" />
             <input
               ref={inputRef}
               type="text"
@@ -80,9 +80,10 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
             )}
             <button
               onClick={onClose}
-              className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-black dark:hover:text-white transition-colors border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-lg"
+              className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-black dark:hover:text-white transition-colors border border-slate-200 dark:border-slate-700 px-2 py-1 sm:px-3 sm:py-1 rounded-lg flex items-center gap-1"
             >
-              Esc
+              <span className="hidden sm:inline">Esc</span>
+              <span className="sm:hidden">Close</span>
             </button>
           </div>
 
@@ -91,7 +92,7 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
             <div className="max-h-[60vh] overflow-y-auto">
               {isLoading ? (
                 <div className="flex items-center justify-center p-12">
-                  <div className="w-5 h-5 border-2 border-[#2E5BFF] border-t-transparent rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-[#07308D] border-t-transparent rounded-full animate-spin" />
                 </div>
               ) : results.length > 0 ? (
                 <ul className="py-3">
@@ -104,12 +105,12 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
                       >
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[9px] font-black bg-[#2E5BFF]/10 text-[#2E5BFF] px-2 py-0.5 rounded uppercase tracking-widest">
+                            <span className="text-[9px] font-black bg-[#07308D]/10 text-[#07308D] px-2 py-0.5 rounded uppercase tracking-widest">
                               {article.category}
                             </span>
                           </div>
                           <p 
-                            className="font-serif font-bold text-black dark:text-white truncate group-hover:text-[#2E5BFF] transition-colors"
+                            className="font-serif font-bold text-black dark:text-white truncate group-hover:text-[#07308D] transition-colors"
                             style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
                           >
                             {article.title}
@@ -118,7 +119,7 @@ export default function SearchBar({ onClose }: { onClose: () => void }) {
                             {article.excerpt}
                           </p>
                         </div>
-                        <ArrowRight size={16} className="shrink-0 mt-1 text-slate-300 group-hover:text-[#2E5BFF] transition-colors" />
+                        <ArrowRight size={16} className="shrink-0 mt-1 text-slate-300 group-hover:text-[#07308D] transition-colors" />
                       </Link>
                     </li>
                   ))}

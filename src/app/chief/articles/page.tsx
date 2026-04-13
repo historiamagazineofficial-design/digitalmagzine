@@ -15,7 +15,7 @@ const TYPE_COLORS: Record<string, string> = {
   Articles: 'bg-white/10 text-white',
   Fiction:  'bg-white/5 text-slate-300',
   Voices:   'bg-white/5 text-slate-400',
-  Mythos: 'bg-[#2E5BFF]/20 text-[#2E5BFF]',
+  Mythos: 'bg-[#07308D]/20 text-[#07308D]',
 };
 
 export default function ArticlesListPage() {
@@ -62,7 +62,7 @@ export default function ArticlesListPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#0F0F0F] text-white flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#2E5BFF]" size={32} />
+        <Loader2 className="animate-spin text-[#07308D]" size={32} />
       </div>
     );
   }
@@ -76,7 +76,7 @@ export default function ArticlesListPage() {
         </div>
         <Link
           href="/chief/articles/new"
-          className="flex items-center gap-2 bg-[#2E5BFF] text-white px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-[#2E5BFF]/80 transition-all shadow-lg shadow-[#2E5BFF]/20"
+          className="flex items-center gap-2 bg-[#07308D] text-white px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-[#07308D]/80 transition-all shadow-lg shadow-[#07308D]/20"
         >
           <Plus size={14} strokeWidth={3} />
           Create New Entry
@@ -116,7 +116,7 @@ export default function ArticlesListPage() {
                 <tr key={article.slug} className="group hover:bg-white/[0.02] transition-colors">
                   <td className="px-8 py-6">
                     <div className="flex flex-col gap-2">
-                      <span className="font-serif text-base font-bold text-white group-hover:text-[#2E5BFF] transition-colors line-clamp-1">{article.title}</span>
+                      <span className="font-serif text-base font-bold text-white group-hover:text-[#07308D] transition-colors line-clamp-1">{article.title}</span>
                       <div className="flex items-center gap-2">
                         <span className={`text-[8px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider ${TYPE_COLORS[article.category] || TYPE_COLORS.Articles}`}>
                           {article.category}
@@ -149,7 +149,7 @@ export default function ArticlesListPage() {
                   <td className="px-8 py-6">
                     <button
                       onClick={() => handleToggleHomepage(article.slug, article.showOnHomepage !== false)}
-                      className={`relative w-11 h-6 rounded-full transition-colors ${article.showOnHomepage !== false ? 'bg-[#2E5BFF]' : 'bg-slate-700'}`}
+                      className={`relative w-11 h-6 rounded-full transition-colors ${article.showOnHomepage !== false ? 'bg-[#07308D]' : 'bg-slate-700'}`}
                       title={article.showOnHomepage !== false ? "Hide from Homepage" : "Show on Homepage"}
                     >
                       <span className={`absolute top-1 bottom-1 w-4 bg-white rounded-full transition-all ${article.showOnHomepage !== false ? 'left-[calc(100%-1.25rem)]' : 'left-1'}`}></span>

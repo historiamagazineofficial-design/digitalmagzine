@@ -22,10 +22,10 @@ function StoryCard({ slug, title, excerpt, category, imageUrl }: StoryCardProps)
         />
       </Link>
       <div className="flex flex-col gap-3">
-        <span className="text-[#2E5BFF] text-[10px] font-bold tracking-widest uppercase">
+        <span className="text-[#07308D] text-[10px] font-bold tracking-widest uppercase">
           {category}
         </span>
-        <h3 className="text-2xl font-serif font-bold leading-snug group-hover:text-[#2E5BFF] transition-colors text-slate-900 dark:text-white">
+        <h3 className="text-2xl font-serif font-bold leading-snug group-hover:text-[#07308D] transition-colors text-slate-900 dark:text-white">
           {title}
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -33,7 +33,7 @@ function StoryCard({ slug, title, excerpt, category, imageUrl }: StoryCardProps)
         </p>
         <Link
           href={`/article/${slug}`}
-          className="text-xs font-bold border-b border-[#1a1a1a] dark:border-white self-start pb-1 mt-2 hover:border-[#2E5BFF] hover:text-[#2E5BFF] transition-colors"
+          className="text-xs font-bold border-b border-[#1a1a1a] dark:border-white self-start pb-1 mt-2 hover:border-[#07308D] hover:text-[#07308D] transition-colors"
         >
           Read Essay
         </Link>

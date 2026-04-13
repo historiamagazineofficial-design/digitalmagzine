@@ -25,7 +25,7 @@ export default async function FictionSection() {
       {/* Section header */}
       <div className="flex items-end justify-between mb-12 pb-6 border-b-2 border-black/10 dark:border-white/10">
         <div className="flex-1">
-          <p className="text-[10px] font-bold text-[#2E5BFF] mb-1">The Narrative Wing</p>
+          <p className="text-[10px] font-bold text-[#07308D] mb-1">The Narrative Wing</p>
           <h2 className="text-2xl md:text-3xl font-bold font-serif tracking-tight text-black dark:text-white leading-none">
             Fiction
           </h2>
@@ -35,7 +35,7 @@ export default async function FictionSection() {
           className="hidden md:flex items-center gap-2 text-[10px] font-bold text-slate-500 hover:text-black dark:hover:text-white transition-colors group pb-1"
         >
           Explore
-          <span className="w-0 group-hover:w-6 h-px bg-[#2E5BFF] transition-all duration-300" />
+          <span className="w-0 group-hover:w-6 h-px bg-[#07308D] transition-all duration-300" />
         </Link>
       </div>
 

@@ -17,7 +17,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: 'text-[#2E5BFF] underline',
+          class: 'text-[#07308D] underline',
         },
       }),
     ],
@@ -60,7 +60,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={`p-2 rounded-md transition-colors ${editor.isActive('heading', { level: 3 }) ? 'bg-[#2E5BFF] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive('heading', { level: 3 }) ? 'bg-[#07308D] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
           title="Heading"
         >
           <Heading3 size={16} />
@@ -69,7 +69,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-2 rounded-md transition-colors ${editor.isActive('bold') ? 'bg-[#2E5BFF] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive('bold') ? 'bg-[#07308D] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
           title="Bold"
         >
           <Bold size={16} />
@@ -77,7 +77,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-2 rounded-md transition-colors ${editor.isActive('italic') ? 'bg-[#2E5BFF] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive('italic') ? 'bg-[#07308D] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
           title="Italic"
         >
           <Italic size={16} />
@@ -85,7 +85,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={`p-2 rounded-md transition-colors ${editor.isActive('blockquote') ? 'bg-[#2E5BFF] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive('blockquote') ? 'bg-[#07308D] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
           title="Quote"
         >
           <Quote size={16} />
@@ -94,7 +94,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-2 rounded-md transition-colors ${editor.isActive('bulletList') ? 'bg-[#2E5BFF] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive('bulletList') ? 'bg-[#07308D] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
           title="Bullet List"
         >
           <List size={16} />
@@ -102,7 +102,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-2 rounded-md transition-colors ${editor.isActive('orderedList') ? 'bg-[#2E5BFF] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive('orderedList') ? 'bg-[#07308D] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
           title="Numbered List"
         >
           <ListOrdered size={16} />
@@ -110,7 +110,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
         <button
           type="button"
           onClick={toggleLink}
-          className={`p-2 rounded-md transition-colors ${editor.isActive('link') ? 'bg-[#2E5BFF] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
+          className={`p-2 rounded-md transition-colors ${editor.isActive('link') ? 'bg-[#07308D] text-white' : 'text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
           title="Add Link"
         >
           <LinkIcon size={16} />
@@ -175,7 +175,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
              line-height: 1.2;
           }
           .rich-text-container .ProseMirror blockquote {
-             border-left: 4px solid #2E5BFF;
+             border-left: 4px solid #07308D;
              padding-left: 1rem;
              margin-left: 0;
              font-style: italic;

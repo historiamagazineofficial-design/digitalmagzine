@@ -25,7 +25,7 @@ export default async function RelatedPosts({ currentSlug, category, tags }: Rela
   return (
     <section className="w-full max-w-4xl mx-auto px-6 py-16 border-t border-slate-200 dark:border-slate-800 zen-hide">
       <div className="mb-10">
-        <p className="text-[10px] font-bold text-[#2E5BFF] mb-2">Continue Reading</p>
+        <p className="text-[10px] font-bold text-[#07308D] mb-2">Continue Reading</p>
         <h3 className="text-2xl font-serif font-bold text-black dark:text-white">Related Posts</h3>
       </div>
 
@@ -58,7 +58,7 @@ export default async function RelatedPosts({ currentSlug, category, tags }: Rela
             {/* Text */}
             <div>
               <h4 
-                className="font-serif font-bold text-black dark:text-white leading-tight mb-2 group-hover:text-[#2E5BFF] transition-colors"
+                className="font-serif font-bold text-black dark:text-white leading-tight mb-2 group-hover:text-[#07308D] transition-colors"
                 style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700 } : {}}
               >
                 {article.title}

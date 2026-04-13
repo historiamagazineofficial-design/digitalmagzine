@@ -6,7 +6,8 @@ import ThemeToggle from './ThemeToggle';
 import SearchBar from './SearchBar';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Search, X, ArrowRight } from 'lucide-react';
+import { Search, X, ArrowRight, Bell } from 'lucide-react';
+import NotificationCenter from './NotificationCenter';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -32,38 +33,38 @@ export default function SiteHeader() {
 
       // Header Show/Hide: hide immediately when scrolling down past 50px; always show at top
       if (isAtTop) {
-        gsap.to(header, { yPercent: 0, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
+        gsap.to(header, { yPercent: 0, duration: 0.25, ease: 'power3.out', overwrite: 'auto' });
       } else if (isScrollingDown && currentScrollY > 50) {
-        gsap.to(header, { yPercent: -100, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
+        gsap.to(header, { yPercent: -100, duration: 0.25, ease: 'power3.out', overwrite: 'auto' });
       } else if (!isScrollingDown) {
-        gsap.to(header, { yPercent: 0, duration: 0.35, ease: 'power3.out', overwrite: 'auto' });
+        gsap.to(header, { yPercent: 0, duration: 0.25, ease: 'power3.out', overwrite: 'auto' });
       }
 
       // Glassmorphism & Logo scaling: activate after just 20px of scroll
       const isScrolled = currentScrollY > 20;
       if (isScrolled) {
         gsap.to(header, { 
-          backgroundColor: 'rgba(var(--background-rgb), 0.98)',
+          backgroundColor: 'rgba(15, 23, 42, 0.8)', // Dark Slate Translucent (Dark Mode Style)
           backdropFilter: 'blur(20px)',
-          borderBottomColor: 'rgba(99, 102, 241, 0.1)',
+          borderBottomColor: 'rgba(255, 255, 255, 0.1)',
           height: '75px',
-          duration: 0.5,
+          duration: 0.3,
           ease: 'power2.out',
           overwrite: 'auto'
         });
-        gsap.to(logo, { scale: 0.8, y: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(logo, { scale: 0.8, y: 0, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
         header.classList.add('header-scrolled');
       } else {
         gsap.to(header, { 
-          backgroundColor: 'rgba(var(--background-rgb, 19, 20, 31), 0)', // Use a default dark rgb in case it's not set
+          backgroundColor: 'transparent',
           backdropFilter: 'blur(0px)',
           borderBottomColor: 'transparent',
-          height: '110px',
-          duration: 0.5,
+          height: '120px',
+          duration: 0.3,
           ease: 'power2.out',
           overwrite: 'auto'
         });
-        gsap.to(logo, { scale: 1, y: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(logo, { scale: 1, y: 0, duration: 0.3, ease: 'power2.out', overwrite: 'auto' });
         header.classList.remove('header-scrolled');
       }
 
@@ -91,23 +92,23 @@ export default function SiteHeader() {
     <>
       <header 
         ref={headerRef}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center h-[100px] border-b border-transparent zen-hide"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center h-[120px] border-b border-transparent zen-hide"
         style={{ 
           // Inject CSS variables for dark mode compatibility in GSAP
           '--header-bg-scrolled': 'rgba(var(--background-rgb, 246, 246, 248), 0.85)' 
         } as React.CSSProperties}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center h-full gap-4 relative">
+        <div className="flex justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] items-center h-full gap-2 lg:gap-4 relative">
             {/* Left Nav */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 lg:gap-6 relative z-20">
               {/* Mobile Hamburger */}
               <button 
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="lg:hidden p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg transition-colors group"
+                className="lg:hidden p-1.5 sm:p-2.5 bg-[#07308D]/5 dark:bg-[#07308D]/10 hover:bg-[#07308D]/15 rounded-xl transition-all group border border-[#07308D]/10"
                 aria-label="Menu"
               >
-                <div className="relative w-6 h-5 flex flex-col justify-between overflow-hidden">
+                <div className="relative w-5 h-4 sm:w-6 sm:h-5 flex flex-col justify-between overflow-hidden">
                   <span className="w-full h-0.5 bg-slate-900 dark:bg-white transition-all duration-300 transform group-hover:translate-x-1"></span>
                   <span className="w-1/2 h-0.5 bg-slate-900 dark:bg-white transition-all duration-300 delay-75"></span>
                   <span className="w-full h-0.5 bg-slate-900 dark:bg-white transition-all duration-300 delay-150 transform group-hover:-translate-x-1"></span>
@@ -116,17 +117,17 @@ export default function SiteHeader() {
 
               {/* Desktop Nav */}
               <nav className="hidden lg:flex items-center gap-4 xl:gap-8 pl-2">
-                <Link href="/" className="text-[11px] font-bold hover:text-[#2E5BFF] transition-colors">{'Home'}</Link>
+                <Link href="/" className="text-[11px] font-bold hover:text-[#07308D] transition-colors">{'Home'}</Link>
                 
                 {/* Articles Dropdown */}
                 <div className="relative group/nav">
-                  <Link href="/archives" className="text-[11px] font-bold hover:text-[#2E5BFF] transition-colors py-4">
+                  <Link href="/archives" className="text-[11px] font-bold hover:text-[#07308D] transition-colors py-4">
                     {'Articles'}
                   </Link>
                   <div className="absolute top-full left-0 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-300 transform translate-y-2 group-hover/nav:translate-y-0 pt-2">
                      <div className="bg-white dark:bg-slate-900 border border-black/5 dark:border-white/5 shadow-2xl rounded-xl py-3 flex flex-col min-w-48 backdrop-blur-md">
                         {['World', 'History', 'Theology', 'Sufism'].map((tag) => (
-                           <Link key={tag} href={`/archives?tag=${tag}`} className="px-5 py-2.5 text-[10px] font-bold hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#2E5BFF] transition-colors">
+                           <Link key={tag} href={`/archives?tag=${tag}`} className="px-5 py-2.5 text-[10px] font-bold hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#07308D] transition-colors">
                               {tag}
                            </Link>
                         ))}
@@ -136,13 +137,13 @@ export default function SiteHeader() {
 
                 {/* Fiction Dropdown */}
                 <div className="relative group/nav">
-                  <Link href="/fiction" className="text-[11px] font-bold hover:text-[#2E5BFF] transition-colors py-4">
+                  <Link href="/fiction" className="text-[11px] font-bold hover:text-[#07308D] transition-colors py-4">
                     {'Fiction'}
                   </Link>
                   <div className="absolute top-full left-0 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-300 transform translate-y-2 group-hover/nav:translate-y-0 pt-2">
                      <div className="bg-white dark:bg-slate-900 border border-black/5 dark:border-white/5 shadow-2xl rounded-xl py-3 flex flex-col min-w-48 backdrop-blur-md">
                         {['Story', 'Poem', 'Travelings', 'Literature'].map((tag) => (
-                           <Link key={tag} href={`/fiction?tag=${tag}`} className="px-5 py-2.5 text-[10px] font-bold hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#2E5BFF] transition-colors">
+                           <Link key={tag} href={`/fiction?tag=${tag}`} className="px-5 py-2.5 text-[10px] font-bold hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#07308D] transition-colors">
                               {tag}
                            </Link>
                         ))}
@@ -152,12 +153,12 @@ export default function SiteHeader() {
 
                 {/* Mythos Dropdown */}
                 <div className="relative group/nav">
-                  <Link href="/mythos" className="text-[11px] font-bold hover:text-[#2E5BFF] transition-colors border border-black/10 dark:border-white/10 px-2 py-0.5 rounded-sm">
+                  <Link href="/mythos" className="text-[11px] font-bold hover:text-[#07308D] transition-colors border border-black/10 dark:border-white/10 px-2 py-0.5 rounded-sm">
                     {'Mythos'}
                   </Link>
                   <div className="absolute top-full left-0 opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-300 transform translate-y-2 group-hover/nav:translate-y-0 pt-2">
                      <div className="bg-white dark:bg-slate-900 border border-black/5 dark:border-white/5 shadow-2xl rounded-xl py-3 flex flex-col min-w-48 backdrop-blur-md">
-                        <Link href="/mythos" className="px-5 py-2.5 text-[10px] font-bold hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#2E5BFF] transition-colors">
+                        <Link href="/mythos" className="px-5 py-2.5 text-[10px] font-bold hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#07308D] transition-colors">
                             Explore {'Mythos'}
                         </Link>
                      </div>
@@ -166,79 +167,58 @@ export default function SiteHeader() {
 
                 {/* Voices Link */}
                 <div className="relative group/nav">
-                  <Link href="/voices" className="text-[11px] font-bold hover:text-[#2E5BFF] transition-colors py-4">
+                  <Link href="/voices" className="text-[11px] font-bold hover:text-[#07308D] transition-colors py-4">
                     {'Voices'}
                   </Link>
                 </div>
               </nav>
             </div>
             
-            <div ref={logoRef} className="flex flex-col items-center justify-center pointer-events-none px-4 h-full">
-              <Link
-                href="/"
-                className="flex flex-col items-start whitespace-nowrap pointer-events-auto"
-                style={{ lineHeight: 1, gap: 0 }}
+            {/* Logo Wrapper to protect centering from GSAP */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0 z-10 pointer-events-none flex items-center justify-center">
+              <div 
+                ref={logoRef} 
+                className="flex flex-col items-center justify-center h-[60px] lg:h-[100px] w-auto origin-center mt-0 lg:mt-[-10px]"
               >
-                {/* THE — Small, Montserrat Black, above "INK" */}
-                <span
-                  className="text-white/90 [.header-scrolled_&]:text-[#0F172A] dark:[.header-scrolled_&]:text-white transition-colors uppercase select-none"
-                  style={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 900,
-                    fontSize: 'clamp(0.9rem, 2vw, 1.35rem)',
-                    letterSpacing: '0.18em',
-                    lineHeight: 1,
-                    marginBottom: '0.04em',
-                    paddingLeft: '0.05em',
-                  }}
-                >
-                  THE
-                </span>
-
-                {/* INKSPIRE — original reversed-K typographic mark, unchanged */}
-                <div
-                  className="flex items-center font-black font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
-                  style={{ letterSpacing: '-0.02em', lineHeight: 1 }}
-                >
-                  {/* IN — Enhanced with Deep Ink & Cobalt Gradient */}
-                  <span 
-                    className="transition-all duration-700 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-slate-400 [.header-scrolled_&]:from-[#0F172A] [.header-scrolled_&]:via-[#1E1B4B] [.header-scrolled_&]:to-[#4F46E5] dark:[.header-scrolled_&]:from-white dark:[.header-scrolled_&]:via-white dark:[.header-scrolled_&]:to-[#6366F1]"
+                  <Link
+                    href="/"
+                    className="flex flex-col items-center justify-center pointer-events-auto group mt-2 lg:mt-0"
                   >
-                    IN
-                  </span>
-
-                  {/* Reversed K — Electric Cobalt Blue */}
-                  <div
-                    className="inline-flex items-center justify-center transform scale-x-[-1]"
-                    style={{ height: '1em', width: '0.65em', marginLeft: '0.05em', marginRight: '0.05em' }}
-                  >
-                    <svg
-                      viewBox="0 0 56 72"
-                      aria-label="K"
-                      className="h-full w-full overflow-visible"
-                      fill="none"
-                    >
-                      <rect x="0" y="0" width="14" height="72" fill="#2E5BFF" />
-                      <path d="M 14,36 L 56,0 L 56,18 L 28,42 Z" fill="#2E5BFF" />
-                      <path d="M 14,36 L 56,72 L 56,54 L 28,30 Z" fill="#2E5BFF" />
-                    </svg>
-                  </div>
-
-                  {/* SPIRE — Electric Cobalt Blue */}
-                  <span className="text-[#2E5BFF] transition-colors">SPIRE</span>
-                </div>
-              </Link>
+                  <div className="relative h-[3.25rem] sm:h-[4rem] md:h-[5rem] lg:h-[7rem] aspect-[4.5/1] transition-all duration-300">
+                      {/* LIGHT MODE: Layer 1 — full image blackened */}
+                      <img 
+                        src="/title .png" 
+                        alt="The Inkspire" 
+                        className="absolute inset-0 w-full h-full object-contain brightness-0 dark:hidden"
+                      />
+                      {/* LIGHT MODE: Layer 2 — original blue kspire body only (below 'the') */}
+                      <img 
+                        src="/title .png" 
+                        alt="" 
+                        className="absolute inset-0 w-full h-full object-contain dark:hidden"
+                        style={{ clipPath: 'inset(40% 0 0 38%)' }}
+                      />
+                      {/* DARK MODE: original image — white in>k + blue spire natively */}
+                      <img 
+                        src="/title .png" 
+                        alt="The Inkspire" 
+                        className="absolute inset-0 w-full h-full object-contain hidden dark:block"
+                      />
+                    </div>
+                  </Link>
+              </div>
             </div>
             
             {/* Right Actions */}
-            <div className="flex items-center justify-end gap-4 relative z-20">
+            <div className="flex items-center justify-end gap-1.5 sm:gap-4 relative z-20">
                <button
                  onClick={() => setSearchOpen(true)}
-                 className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg transition-colors"
+                 className="p-1.5 sm:p-2.5 bg-[#07308D]/5 dark:bg-[#07308D]/10 hover:bg-[#07308D]/15 rounded-xl transition-all border border-[#07308D]/10 text-slate-700 dark:text-slate-300"
                  aria-label="Search"
                >
-                 <Search size={16} className="text-slate-700 dark:text-slate-300" />
+                 <Search className="w-4 h-4 sm:w-5 sm:h-5 text-current" />
                </button>
+               <NotificationCenter />
                <div className="hidden md:block">
                  
                </div>
@@ -263,20 +243,16 @@ export default function SiteHeader() {
           <div className="p-10 h-full flex flex-col">
             <div className="flex justify-between items-center mb-16">
               <div className="flex items-center gap-2">
-                <div style={{ width: '2rem', height: '2rem' }}>
-                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                    <path d="M50 80 Q30 70 12 72 L12 30 Q30 28 50 42 Z" fill="#2E5BFF" opacity="0.85" />
-                    <path d="M50 80 Q70 70 88 72 L88 30 Q70 28 50 42 Z" fill="#2E5BFF" />
-                    <path d="M50 8 L58 38 L54 42 L50 80 L46 42 L42 38 Z" fill="#1A1A1A" opacity="0.9" />
-                    <circle cx="50" cy="10" r="3" fill="#1A1A1A" opacity="0.85" />
-                  </svg>
+                <div className="w-10 h-10 rounded-xl bg-[#07308D] p-1.5 shadow-lg shadow-[#07308D]/20 flex items-center justify-center">
+                  <img src="/maink.png" alt="Icon" className="w-full h-full object-contain" />
                 </div>
-                <div className="flex flex-col leading-none">
-                  <span className="text-[8px] font-black tracking-[0.25em] text-[#2E5BFF] uppercase">THE</span>
-                  <span className="text-xl font-black tracking-tight text-black dark:text-white">INKSPIRE</span>
+                <div className="relative h-[1.5rem] aspect-[4.5/1] transition-all duration-300 ml-2">
+                  <img src="/title .png" alt="The Inkspire" className="absolute inset-0 w-full h-full object-contain brightness-0 dark:hidden" />
+                  <img src="/title .png" alt="" className="absolute inset-0 w-full h-full object-contain dark:hidden" style={{ clipPath: 'inset(40% 0 0 38%)' }} />
+                  <img src="/title .png" alt="The Inkspire" className="absolute inset-0 w-full h-full object-contain hidden dark:block" />
                 </div>
               </div>
-              <button onClick={() => setMenuOpen(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all">
+              <button onClick={() => setMenuOpen(false)} className="p-2.5 bg-[#07308D]/5 dark:bg-[#07308D]/10 hover:bg-[#07308D]/15 rounded-xl transition-all border border-[#07308D]/10">
                 <X size={28} className="text-slate-900 dark:text-white" />
               </button>
             </div>

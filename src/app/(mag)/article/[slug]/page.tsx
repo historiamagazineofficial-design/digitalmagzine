@@ -65,8 +65,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         {/* Article Header */}
         <header className="w-full max-w-4xl mx-auto px-6 py-12 md:py-24 flex flex-col items-start text-left">
           <div className="mb-10 flex items-center gap-4">
-             <div className="h-[2px] w-12 bg-[#2E5BFF]"></div>
-             <span className="text-[11px] font-bold text-[#2E5BFF]">
+             <div className="h-[2px] w-12 bg-[#07308D]"></div>
+             <span className="text-[11px] font-bold text-[#07308D]">
                {article.category}
              </span>
           </div>
@@ -104,7 +104,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <span className="text-[9px] font-bold text-slate-400 mb-1 leading-none">Published</span>
               <div className="flex items-center gap-3 text-[11px] font-bold text-black dark:text-white mt-1">
                 <time>{article.date}</time>
-                <span className="w-1 h-1 rounded-full bg-[#2E5BFF]"></span>
+                <span className="w-1 h-1 rounded-full bg-[#07308D]"></span>
                 <span>{article.readingTime}</span>
               </div>
             </div>

@@ -47,7 +47,7 @@ export default function TagManagerPage() {
 
       <div className="max-w-2xl">
         <div className="flex items-center gap-3 mb-2">
-          <Hash size={22} className="text-[#2E5BFF]" />
+          <Hash size={22} className="text-[#07308D]" />
           <h1 className="text-2xl font-serif font-bold">Tag Manager</h1>
         </div>
         <p className="text-slate-500 text-sm mb-10">
@@ -64,12 +64,12 @@ export default function TagManagerPage() {
               onChange={e => setNewTag(e.target.value.replace(/^#/, ''))}
               onKeyDown={e => e.key === 'Enter' && addTag()}
               placeholder="NewTopicTag"
-              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 pl-8 pr-4 text-white placeholder-slate-600 focus:outline-none focus:border-[#2E5BFF] focus:ring-1 focus:ring-[#2E5BFF] transition-all text-sm"
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 pl-8 pr-4 text-white placeholder-slate-600 focus:outline-none focus:border-[#07308D] focus:ring-1 focus:ring-[#07308D] transition-all text-sm"
             />
           </div>
           <button
             onClick={addTag}
-            className="flex items-center gap-2 px-5 bg-[#2E5BFF] hover:bg-[#2E5BFF]/80 text-white text-sm font-bold rounded-lg transition-colors"
+            className="flex items-center gap-2 px-5 bg-[#07308D] hover:bg-[#07308D]/80 text-white text-sm font-bold rounded-lg transition-colors"
           >
             <Plus size={16} /> Add
           </button>

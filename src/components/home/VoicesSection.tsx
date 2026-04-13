@@ -16,15 +16,14 @@ export default async function VoicesSection() {
 
   return (
     <section className="bg-black dark:bg-[#07090F] text-white rounded-[2rem] p-12 md:p-20 mb-20 overflow-hidden relative border border-white/5 group/voices">
-       {/* Live Fluid Background Effect */}
        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
          {/* Main atmosphere blobs */}
-         <div className="absolute -top-[10%] -left-[10%] w-[80%] h-[80%] bg-[#1e3a8a]/15 rounded-full blur-[120px] animate-fluid-blob" />
-         <div className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] bg-[#4c1d95]/15 rounded-full blur-[100px] animate-fluid-blob-slow" />
+         <div className="absolute -top-[10%] -left-[10%] w-[80%] h-[80%] bg-[#07308D]/15 rounded-full blur-[120px] animate-fluid-blob" />
+         <div className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] bg-[#07308D]/10 rounded-full blur-[100px] animate-fluid-blob-slow" />
          
          {/* Moving highlight blobs */}
-         <div className="absolute top-1/4 -right-[5%] w-[40%] h-[40%] bg-[#10b981]/10 rounded-full blur-[90px] animate-fluid-blob-fast" />
-         <div className="absolute bottom-1/4 -left-[5%] w-[35%] h-[35%] bg-[#2E5BFF]/5 rounded-full blur-[80px] animate-fluid-blob" />
+         <div className="absolute top-1/4 -right-[5%] w-[40%] h-[40%] bg-[#07308D]/10 rounded-full blur-[90px] animate-fluid-blob-fast" />
+         <div className="absolute bottom-1/4 -left-[5%] w-[35%] h-[35%] bg-[#07308D]/5 rounded-full blur-[80px] animate-fluid-blob" />
          
          {/* Center depth */}
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-slate-900/40 rounded-full blur-[160px] animate-fluid-blob-slow" />
@@ -36,7 +35,7 @@ export default async function VoicesSection() {
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="flex items-end justify-between mb-20 pb-6 border-b border-white/10">
           <div className="flex-1">
-            <p className="text-[10px] font-bold text-[#2E5BFF] mb-1">Editorial Signature</p>
+            <p className="text-[10px] font-bold text-[#07308D] mb-1">Editorial Signature</p>
             <h2 className="text-2xl md:text-3xl font-bold font-serif leading-none text-white">
               Voices
             </h2>
@@ -46,7 +45,7 @@ export default async function VoicesSection() {
             className="hidden md:flex items-center gap-2 text-[10px] font-bold text-white/40 hover:text-white transition-colors group pb-1"
           >
             All Voices
-            <span className="w-0 group-hover:w-6 h-px bg-[#2E5BFF] transition-all duration-300" />
+            <span className="w-0 group-hover:w-6 h-px bg-[#07308D] transition-all duration-300" />
           </Link>
         </div>
         
@@ -64,7 +63,7 @@ export default async function VoicesSection() {
                 <div className="h-0.5 w-12 bg-white/20 md:group-hover:w-16 transition-all duration-500"></div>
               </div>
               <div className="flex-1">
-                <p className="font-serif text-3xl md:text-4xl italic leading-tight text-[#6366F1] mb-8 font-medium whitespace-pre-wrap">
+                <p className="font-serif text-3xl md:text-4xl italic leading-tight text-[#07308D] mb-8 font-medium whitespace-pre-wrap">
                   &ldquo;{voice.quote}&rdquo;
                 </p>
                 <div className="inline-flex items-center gap-4 text-[10px] font-bold text-white/40 md:group-hover:text-white transition-all group/link cursor-default">

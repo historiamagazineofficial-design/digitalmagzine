@@ -30,8 +30,8 @@ export default async function HeroSection() {
   if (!mainFeature) {
     return (
       <div className="py-32 text-center flex flex-col items-center gap-6 border border-dashed border-black/10 dark:border-white/10 rounded-3xl">
-        <div className="w-16 h-16 rounded-full bg-[#2E5BFF]/10 flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full border-2 border-[#2E5BFF] border-t-transparent animate-spin" />
+        <div className="w-16 h-16 rounded-full bg-[#07308D]/10 flex items-center justify-center">
+          <div className="w-6 h-6 rounded-full border-2 border-[#07308D] border-t-transparent animate-spin" />
         </div>
         <div>
           <p className="font-serif italic text-slate-500 dark:text-slate-400 text-lg mb-1">The archives are being summoned…</p>
@@ -99,7 +99,7 @@ export default async function HeroSection() {
               </div>
             </div>
             <h3 
-              className="text-2xl font-bold font-serif leading-snug md:group-hover:text-[#2E5BFF] transition-colors duration-300 dark:text-white"
+              className="text-2xl font-bold font-serif leading-snug md:group-hover:text-[#07308D] transition-colors duration-300 dark:text-white"
               style={/[\u0D00-\u0D7F]/.test(secondaryArticles[0].title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2.6rem', lineHeight: '1.2' } : {}}
             >
               {secondaryArticles[0].title}

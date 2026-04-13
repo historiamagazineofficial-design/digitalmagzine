@@ -16,14 +16,14 @@ export default async function ArticlesPage() {
       {/* ── Hero Header ── */}
       <section className="relative overflow-hidden bg-black text-white">
         <div className="absolute inset-0 opacity-20"
-          style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #2E5BFF 0%, transparent 60%), radial-gradient(circle at 80% 20%, #1754cf 0%, transparent 50%)' }}
+          style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #07308D 0%, transparent 60%), radial-gradient(circle at 80% 20%, #07308D 0%, transparent 50%)' }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-20 py-28 md:py-36">
-          <p className="text-[10px] font-bold text-[#2E5BFF] mb-4">THE INKSPIRE</p>
+          <p className="text-[10px] font-bold text-[#07308D] mb-4">THE INKSPIRE</p>
           <h1 className="text-5xl md:text-7xl font-bold font-serif tracking-tight leading-none mb-6 text-white" style={{ fontFamily: 'var(--font-heading)' }}>
             Articles
           </h1>
-          <div className="w-16 h-1 bg-[#2E5BFF] mb-8" />
+          <div className="w-16 h-1 bg-[#07308D] mb-8" />
           <p className="text-slate-300 text-lg md:text-xl font-serif italic leading-relaxed max-w-2xl font-light">
             A comprehensive record of scholarly depth, theological inquiry, and the currents of Islamic intellectual history.
           </p>

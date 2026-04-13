@@ -53,9 +53,9 @@ export default function MediaSelector({ onSelect, onClose }: MediaSelectorProps)
               placeholder="Filter by name or URL..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full bg-black/50 border border-white/10 rounded-2xl px-14 py-4 text-sm text-white outline-none focus:border-[#2E5BFF] transition-all font-bold placeholder:text-slate-700"
+              className="w-full bg-black/50 border border-white/10 rounded-2xl px-14 py-4 text-sm text-white outline-none focus:border-[#07308D] transition-all font-bold placeholder:text-slate-700"
             />
-            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-[#2E5BFF] transition-colors" size={20} />
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-[#07308D] transition-colors" size={20} />
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export default function MediaSelector({ onSelect, onClose }: MediaSelectorProps)
         <div className="flex-1 overflow-y-auto p-8 no-scrollbar">
           {loading ? (
             <div className="h-64 flex flex-col items-center justify-center text-slate-500 gap-4">
-              <Loader2 className="animate-spin text-[#2E5BFF]" size={32} />
+              <Loader2 className="animate-spin text-[#07308D]" size={32} />
               <p className="text-[10px] font-bold">Accessing Registry...</p>
             </div>
           ) : filtered.length === 0 ? (
@@ -80,7 +80,7 @@ export default function MediaSelector({ onSelect, onClose }: MediaSelectorProps)
                 <button
                   key={item.id}
                   onClick={() => onSelect(item.url)}
-                  className="group relative aspect-square bg-black rounded-2xl overflow-hidden border border-white/5 hover:border-[#2E5BFF]/50 transition-all duration-500 shadow-lg"
+                  className="group relative aspect-square bg-black rounded-2xl overflow-hidden border border-white/5 hover:border-[#07308D]/50 transition-all duration-500 shadow-lg"
                 >
                   <img 
                     src={item.url} 
@@ -93,7 +93,7 @@ export default function MediaSelector({ onSelect, onClose }: MediaSelectorProps)
                   </div>
                   
                   {/* Select Overlay icon */}
-                  <div className="absolute top-4 right-4 bg-[#2E5BFF] text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all scale-50 group-hover:scale-100 duration-300">
+                  <div className="absolute top-4 right-4 bg-[#07308D] text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all scale-50 group-hover:scale-100 duration-300">
                     <ImageIcon size={14} />
                   </div>
                 </button>

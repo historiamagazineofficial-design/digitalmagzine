@@ -21,14 +21,14 @@ export default function FeaturedRow({ articles }: FeaturedRowProps) {
             >
               {/* Category tag without box */}
               <div className="mb-4 flex justify-center">
-                <span className="inline-block text-[#2E5BFF] text-[9px] font-bold">
+                <span className="inline-block text-[#07308D] text-[9px] font-bold">
                   {article.category || 'Focus'}
                 </span>
               </div>
               
               {/* Smaller serif typography */}
               <h3 
-                className={`text-lg md:text-xl font-bold font-serif leading-snug text-center text-black/90 dark:text-white/90 mb-3 md:group-hover:text-[#2E5BFF] transition-colors line-clamp-3 ${
+                className={`text-lg md:text-xl font-bold font-serif leading-snug text-center text-black/90 dark:text-white/90 mb-3 md:group-hover:text-[#07308D] transition-colors line-clamp-3 ${
                   /[\u0D00-\u0D7F]/.test(article.title) ? 'font-bold' : ''
                 }`}
                 style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2.6rem', lineHeight: '1.2' } : {}}
@@ -44,11 +44,11 @@ export default function FeaturedRow({ articles }: FeaturedRowProps) {
               )}
               
               <div className="mt-auto pt-4 border-t border-black/5 dark:border-white/5 text-center flex items-center justify-center gap-2">
-                <div className="w-3 h-[1px] bg-[#2E5BFF]/60"></div>
-                <p className="text-[9px] font-bold text-[#2E5BFF]/80">
+                <div className="w-3 h-[1px] bg-[#07308D]/60"></div>
+                <p className="text-[9px] font-bold text-[#07308D]/80">
                   {article.author}
                 </p>
-                <div className="w-3 h-[1px] bg-[#2E5BFF]/60"></div>
+                <div className="w-3 h-[1px] bg-[#07308D]/60"></div>
               </div>
             </Link>
           ))}

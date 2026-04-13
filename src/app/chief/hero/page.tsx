@@ -103,7 +103,7 @@ export default function HeroConfigPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#0F0F0F] text-white flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#2E5BFF]" size={32} />
+        <Loader2 className="animate-spin text-[#07308D]" size={32} />
       </div>
     );
   }
@@ -119,7 +119,7 @@ export default function HeroConfigPage() {
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="flex shrink-0 items-center gap-2 bg-[#2E5BFF] text-white px-5 py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-[#2E5BFF]/80 transition-all shadow-lg shadow-[#2E5BFF]/20 disabled:opacity-50"
+            className="flex shrink-0 items-center gap-2 bg-[#07308D] text-white px-5 py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-[#07308D]/80 transition-all shadow-lg shadow-[#07308D]/20 disabled:opacity-50"
           >
             {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} strokeWidth={3} />}
             {saved ? 'Changes Applied!' : isSaving ? 'Applying...' : 'Apply Layout'}
@@ -131,10 +131,10 @@ export default function HeroConfigPage() {
       <div className="mb-10 bg-white/5 border border-white/5 rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2 text-white">
-            <Layout size={18} className="text-[#2E5BFF]" />
+            <Layout size={18} className="text-[#07308D]" />
             <h3 className="font-serif font-bold text-lg">Article Browser & Title Search</h3>
           </div>
-          <span className="text-[9px] uppercase tracking-widest bg-[#2E5BFF]/20 text-[#2E5BFF] px-3 py-1 rounded-full font-bold">New: Search by Title</span>
+          <span className="text-[9px] uppercase tracking-widest bg-[#07308D]/20 text-[#07308D] px-3 py-1 rounded-full font-bold">New: Search by Title</span>
         </div>
         <p className="text-gray-500 text-[11px] mb-6">Type an article title below to find its slug. You can now use either the full **Title** or the **Slug** in any of the fields below.</p>
         
@@ -142,7 +142,7 @@ export default function HeroConfigPage() {
           <input
             type="text"
             placeholder="Search articles by title..."
-            className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl pr-24"
+            className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl pr-24"
             onChange={(e) => {
               const term = e.target.value.toLowerCase();
               setSearchTerm(term);
@@ -155,13 +155,13 @@ export default function HeroConfigPage() {
             {allArticles.filter(a => a.title.toLowerCase().includes(searchTerm)).map(article => (
               <div 
                 key={article.slug}
-                className="bg-white/5 border border-white/10 p-3 rounded-lg cursor-pointer hover:border-[#2E5BFF] transition-all group"
+                className="bg-white/5 border border-white/10 p-3 rounded-lg cursor-pointer hover:border-[#07308D] transition-all group"
                 onClick={() => {
                    navigator.clipboard.writeText(article.slug);
                    alert(`Copied Slug: "${article.slug}" to clipboard. You can now paste it into any of the fields below.`);
                 }}
               >
-                <p className="text-white text-[11px] font-serif font-bold line-clamp-1 group-hover:text-[#2E5BFF] transition-colors">{article.title}</p>
+                <p className="text-white text-[11px] font-serif font-bold line-clamp-1 group-hover:text-[#07308D] transition-colors">{article.title}</p>
                 <p className="text-slate-500 text-[9px] font-mono mt-1">{article.slug}</p>
               </div>
             ))}
@@ -186,7 +186,7 @@ export default function HeroConfigPage() {
                   value={focusConfig.articleSlug}
                   onChange={e => setFocusConfig({...focusConfig, articleSlug: e.target.value})}
                   placeholder="e.g. architecture-of-silence"
-                  className="w-full bg-black/40 border border-white/10 text-white px-5 py-3 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl font-mono"
+                  className="w-full bg-black/40 border border-white/10 text-white px-5 py-3 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl font-mono"
                 />
                 <div className="mt-2 text-[10px] font-bold uppercase tracking-tight flex items-center gap-2">
                   <span className="text-slate-500">Resolved:</span>
@@ -206,7 +206,7 @@ export default function HeroConfigPage() {
                   onChange={e => handleArrayChange('secondarySlugs', e.target.value)}
                   placeholder="slug-or-title"
                   rows={2}
-                  className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl font-mono"
+                  className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl font-mono"
                 />
                 <MultiSlugTitles slugs={focusConfig.secondarySlugs || []} />
                 <p className="text-[9px] text-slate-500 mt-2 uppercase tracking-wider">The system will only display the **first** valid article from this list.</p>
@@ -226,7 +226,7 @@ export default function HeroConfigPage() {
                 onChange={e => handleArrayChange('fictionSlugs', e.target.value)}
                 placeholder="slug-1, slug-2"
                 rows={2}
-                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
+                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
               />
               <MultiSlugTitles slugs={focusConfig.fictionSlugs || []} />
               <p className="text-[9px] text-slate-500 mt-3 uppercase tracking-wider">The homepage will display the **first 2** valid articles from this list. Leave blank to use latest.</p>
@@ -245,7 +245,7 @@ export default function HeroConfigPage() {
                 onChange={e => handleArrayChange('mythosSlugs', e.target.value)}
                 placeholder="slug-1, slug-2"
                 rows={2}
-                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
+                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
               />
               <MultiSlugTitles slugs={focusConfig.mythosSlugs || []} />
               <p className="text-[9px] text-slate-500 mt-3 uppercase tracking-wider">The homepage will display the **first 2** valid articles from this list. Leave blank to use latest.</p>
@@ -267,7 +267,7 @@ export default function HeroConfigPage() {
                 onChange={e => handleArrayChange('featuredSlugs', e.target.value)}
                 placeholder="slug-1, slug-2, slug-3, slug-4"
                 rows={4}
-                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
+                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
               />
               <MultiSlugTitles slugs={focusConfig.featuredSlugs || []} />
               <p className="text-[9px] text-slate-500 mt-3 uppercase tracking-wider">Specify 4 slugs here. Leave blank to default to latest available articles.</p>
@@ -286,7 +286,7 @@ export default function HeroConfigPage() {
                 onChange={e => handleArrayChange('perspectiveSlugs', e.target.value)}
                 placeholder="slug-1, slug-2, slug-3"
                 rows={3}
-                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
+                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
               />
               <MultiSlugTitles slugs={focusConfig.perspectiveSlugs || []} />
               <p className="text-[9px] text-slate-500 mt-3 uppercase tracking-wider">Leave blank to default to the subsequent latest articles.</p>
@@ -305,7 +305,7 @@ export default function HeroConfigPage() {
                 onChange={e => handleArrayChange('articleSlugs', e.target.value)}
                 placeholder="slug-1, slug-2"
                 rows={2}
-                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#2E5BFF] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
+                className="w-full bg-black/40 border border-white/10 text-white px-5 py-4 text-sm outline-none focus:border-[#07308D] transition-colors rounded-xl placeholder-white/10 resize-none font-mono"
               />
               <MultiSlugTitles slugs={focusConfig.articleSlugs || []} />
               <p className="text-[9px] text-slate-500 mt-3 uppercase tracking-wider">The homepage will display the **first 2** valid articles from this list. Leave blank to use latest.</p>

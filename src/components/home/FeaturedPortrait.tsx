@@ -17,7 +17,7 @@ export default function FeaturedPortrait({
     <section className="negative-space-section grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       {/* Text Content */}
       <div className="order-2 lg:order-1 flex flex-col gap-8">
-        <span className="text-[#2E5BFF] text-[10px] font-black tracking-[0.3em] uppercase">
+        <span className="text-[#07308D] text-[10px] font-black tracking-[0.3em] uppercase">
           {label}
         </span>
         <h2 className="text-5xl font-serif font-bold leading-tight text-slate-900 dark:text-white">
@@ -42,7 +42,7 @@ export default function FeaturedPortrait({
 
         <a
           href="#"
-          className="inline-block px-10 py-4 bg-[#1a1a1a] dark:bg-white dark:text-[#1a1a1a] text-white text-xs font-bold tracking-[0.2em] uppercase rounded-full self-start hover:bg-[#2E5BFF] dark:hover:bg-[#2E5BFF] dark:hover:text-white transition-all duration-200"
+          className="inline-block px-10 py-4 bg-[#1a1a1a] dark:bg-white dark:text-[#1a1a1a] text-white text-xs font-bold tracking-[0.2em] uppercase rounded-full self-start hover:bg-[#07308D] dark:hover:bg-[#07308D] dark:hover:text-white transition-all duration-200"
         >
           Explore Profile
         </a>

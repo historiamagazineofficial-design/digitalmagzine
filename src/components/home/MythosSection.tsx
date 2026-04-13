@@ -22,7 +22,7 @@ export default async function MythosSection() {
     <section className="mb-20 px-4 md:px-0">
       <div className="flex items-end justify-between mb-12 pb-6 border-b-2 border-black/10 dark:border-white/10">
         <div className="flex-1">
-          <p className="text-[10px] font-bold text-[#2E5BFF] mb-1">Legends & Epics</p>
+          <p className="text-[10px] font-bold text-[#07308D] mb-1">Legends & Epics</p>
           <h2 className="text-2xl md:text-3xl font-bold font-serif text-black dark:text-white leading-none">
             Mythos
           </h2>
@@ -32,7 +32,7 @@ export default async function MythosSection() {
           className="hidden md:flex items-center gap-2 text-[10px] font-bold text-slate-500 hover:text-black dark:hover:text-white transition-colors group pb-1"
         >
           Explore
-          <span className="w-0 group-hover:w-6 h-px bg-[#2E5BFF] transition-all duration-300" />
+          <span className="w-0 group-hover:w-6 h-px bg-[#07308D] transition-all duration-300" />
         </Link>
       </div>
 
@@ -51,9 +51,9 @@ export default async function MythosSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8 text-white w-full">
-               <span className="inline-block text-[9px] font-bold mb-4 text-[#2E5BFF]">Mythos Selection</span>
+               <span className="inline-block text-[9px] font-bold mb-4 text-[#07308D]">Mythos Selection</span>
                <h3 
-                 className="text-2xl md:text-3xl font-bold font-serif mb-4 md:group-hover:text-[#2E5BFF] transition-colors leading-tight"
+                 className="text-2xl md:text-3xl font-bold font-serif mb-4 md:group-hover:text-[#07308D] transition-colors leading-tight"
                  style={/[\u0D00-\u0D7F]/.test(article.title) ? { fontFamily: '"Rachana", serif', fontWeight: 700, fontSize: '2.6rem' } : {}}
                >
                  {article.title}

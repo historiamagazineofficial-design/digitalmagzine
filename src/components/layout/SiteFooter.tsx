@@ -9,17 +9,13 @@ export default function SiteFooter() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 items-start">
           <div className="lg:col-span-5">
             <Link href="/" className="flex items-center gap-3 mb-8 group">
-              <div style={{ width: '3rem', height: '3rem', flexShrink: 0 }}>
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                  <path d="M50 80 Q30 70 12 72 L12 30 Q30 28 50 42 Z" fill="#2E5BFF" opacity="0.85" />
-                  <path d="M50 80 Q70 70 88 72 L88 30 Q70 28 50 42 Z" fill="#2E5BFF" />
-                  <path d="M50 8 L58 38 L54 42 L50 80 L46 42 L42 38 Z" fill="#1A1A1A" opacity="0.9" className="dark:fill-white" />
-                  <circle cx="50" cy="10" r="3" fill="#1A1A1A" opacity="0.85" className="dark:fill-white" />
-                </svg>
+              <div className="w-14 h-14 rounded-2xl bg-[#07308D] p-2 shadow-xl shadow-[#07308D]/20 flex items-center justify-center shrink-0">
+                <img src="/maink.png" alt="Icon" className="w-full h-full object-contain" />
               </div>
-              <div className="flex flex-col leading-none">
-                <span className="text-[9px] font-black tracking-[0.25em] text-[#2E5BFF] uppercase">THE</span>
-                <span className="text-3xl md:text-4xl font-black tracking-tight text-black dark:text-white lg:tracking-[-0.05em]">INKSPIRE</span>
+              <div className="relative h-[2.5rem] md:h-[3rem] aspect-[4.5/1] transition-all duration-300 ml-2">
+                <img src="/title .png" alt="The Inkspire" className="absolute inset-0 w-full h-full object-contain brightness-0 dark:hidden" />
+                <img src="/title .png" alt="" className="absolute inset-0 w-full h-full object-contain dark:hidden" style={{ clipPath: 'inset(40% 0 0 38%)' }} />
+                <img src="/title .png" alt="The Inkspire" className="absolute inset-0 w-full h-full object-contain hidden dark:block" />
               </div>
             </Link>
             <p className="text-slate-500 dark:text-slate-400 text-lg font-serif italic max-w-sm leading-relaxed font-light">

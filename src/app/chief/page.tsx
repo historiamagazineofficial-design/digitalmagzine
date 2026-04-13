@@ -10,12 +10,13 @@ import {
 } from 'lucide-react';
 
 import { getAllArticles, deleteArticle, Article } from '@/lib/api';
+import { useToast } from '@/components/admin/Toaster';
 
 const TYPE_COLORS: Record<string, string> = {
   Articles: 'bg-slate-200 dark:bg-white/10 text-slate-800 dark:text-white',
   Fiction:  'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300',
   Voices:   'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400',
-  Mythos:   'bg-[#2E5BFF]/10 text-[#2E5BFF]',
+  Mythos:   'bg-[#07308D]/10 text-[#07308D]',
 };
 
 const NAV_ITEMS = [
@@ -32,6 +33,7 @@ const NAV_ITEMS = [
 
 export default function AdminDashboard() {
   const router   = useRouter();
+  const { showToast } = useToast();
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<'All' | 'Articles' | 'Fiction' | 'Voices' | 'Mythos'>('All');
@@ -53,8 +55,9 @@ export default function AdminDashboard() {
       const success = await deleteArticle(slug);
       if (success) {
         setArticles(prev => prev.filter(a => a.slug !== slug));
+        showToast('Entry deleted successfully.', 'success');
       } else {
-        alert('Failed to delete entry. Check console for details.');
+        showToast('Failed to delete entry. Check console for details.', 'error');
       }
     }
   };
@@ -77,7 +80,7 @@ export default function AdminDashboard() {
 
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 relative">
-          <div className="absolute -top-20 -left-10 w-96 h-96 bg-[#2E5BFF]/5 dark:bg-[#2E5BFF]/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+          <div className="absolute -top-20 -left-10 w-96 h-96 bg-[#07308D]/5 dark:bg-[#07308D]/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
           <div className="relative z-10">
             <h2 className="text-3xl font-serif font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-white/60">Digital Command</h2>
             <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 uppercase tracking-widest text-[9px] font-bold">Manage articles, fiction, and editorial voices.</p>
@@ -98,7 +101,7 @@ export default function AdminDashboard() {
             { label: 'Articles',   count: counts.articles,  accent: 'text-slate-800 dark:text-white/80' },
             { label: 'Fiction',    count: counts.fiction,   accent: 'text-slate-700 dark:text-white/60' },
             { label: 'Voices',     count: counts.voices,    accent: 'text-slate-600 dark:text-white/40' },
-            { label: 'Mythos',     count: counts.mythos,    accent: 'text-[#2E5BFF]' },
+            { label: 'Mythos',     count: counts.mythos,    accent: 'text-[#07308D]' },
             { label: 'Published',  count: counts.published, accent: 'text-green-600 dark:text-green-500' },
             { label: 'Drafts',     count: counts.drafts,    accent: 'text-slate-400 dark:text-slate-500' },
           ].map(stat => (
@@ -197,12 +200,12 @@ export default function AdminDashboard() {
                   {/* Actions */}
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3 text-slate-400 dark:text-slate-500">
-                      <Link href={`/article/${article.slug}`} className="hover:text-[#2E5BFF] dark:hover:text-white transition-colors" title="Preview">
+                      <Link href={`/article/${article.slug}`} className="hover:text-[#07308D] dark:hover:text-white transition-colors" title="Preview">
                         <Eye size={15} />
                       </Link>
                       <Link 
                         href={`/chief/articles/${article.slug}/edit`} 
-                        className="hover:text-[#2E5BFF] dark:hover:text-white transition-colors" 
+                        className="hover:text-[#07308D] dark:hover:text-white transition-colors" 
                         title="Edit"
                       >
                         <Edit3 size={15} />
@@ -261,10 +264,10 @@ export default function AdminDashboard() {
             <Link
               key={title}
               href={href}
-              className={`flex items-start gap-5 p-6 rounded-2xl border ${bg} hover:border-[#2E5BFF]/30 dark:hover:border-[#2E5BFF]/50 hover:bg-[#2E5BFF]/5 transition-all group shadow-sm dark:backdrop-blur-md dark:shadow-2xl relative overflow-hidden`}
+              className={`flex items-start gap-5 p-6 rounded-2xl border ${bg} hover:border-[#07308D]/30 dark:hover:border-[#07308D]/50 hover:bg-[#07308D]/5 transition-all group shadow-sm dark:backdrop-blur-md dark:shadow-2xl relative overflow-hidden`}
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-100 dark:bg-white/5 rounded-full blur-3xl group-hover:bg-[#2E5BFF]/10 dark:group-hover:bg-[#2E5BFF]/20 transition-colors pointer-events-none"></div>
-              <Icon size={24} className={`${color} mt-0.5 shrink-0 group-hover:scale-110 group-hover:text-[#2E5BFF] transition-all relative z-10`} />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-100 dark:bg-white/5 rounded-full blur-3xl group-hover:bg-[#07308D]/10 dark:group-hover:bg-[#07308D]/20 transition-colors pointer-events-none"></div>
+              <Icon size={24} className={`${color} mt-0.5 shrink-0 group-hover:scale-110 group-hover:text-[#07308D] transition-all relative z-10`} />
               <div className="relative z-10">
                 <p className={`text-base font-bold uppercase tracking-widest ${color} mb-1.5`}>{title}</p>
                 <p className="text-xs text-slate-500 font-serif italic leading-relaxed">{desc}</p>

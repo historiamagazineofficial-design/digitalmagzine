@@ -10,7 +10,7 @@ export async function GET() {
           siteName: 'THE INKSPIRE',
           description: 'A Digital Magazine exploring faith, art, and history.',
           contactEmail: 'editor@theinkspire.com',
-          primaryColor: '#2E5BFF',
+          primaryColor: '#07308D',
         },
       });
     }
